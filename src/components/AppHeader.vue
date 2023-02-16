@@ -11,18 +11,22 @@
                 </v-img>
             </template>
             <v-spacer/>
-            <v-btn
-                variant="outlined"
-                class="header-button"
-                color="#F58926"
-            >
+            <router-link :to="{ name: 'login', force: true, state: { login: true } }">
+              <v-btn
+                  variant="outlined"
+                  class="header-button"
+                  color="#F58926"
+              >
                 Connexion
-            </v-btn>
-            <v-btn
-                class="header-button header-button-background"
-            >
+              </v-btn>
+            </router-link>
+            <router-link :to="{ name: 'login', force: true, state: { login: false } }">
+              <v-btn
+                  class="header-button header-button-background"
+              >
                 Inscription
-            </v-btn>
+              </v-btn>
+            </router-link>
         </v-app-bar>
         
     </div>
@@ -30,10 +34,12 @@
 
 <script>
 export default {
-    name: 'AppHeader',
-
-    setup() {
-        
-    },
+    name: 'AppHeader'
 }
 </script>
+<style>
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+</style>

@@ -128,16 +128,16 @@ export default {
       }
     },
   },
-  created() {
+  updated() {
     this.login = window.history.state.login;
-  },
+  }
 }
 </script>
 <style scoped>
 h1 {
   font-weight: 700;
   text-align: center;
-  padding-top: 2em;
+  padding-top: 0.5em;
 }
 
 :deep(.v-row) {
@@ -158,9 +158,9 @@ h1 {
 
 #login {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: 100%;
 }
 
 @media (max-width: 850px) {
