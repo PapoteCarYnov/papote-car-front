@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
+import { Vue3Mq } from "vue3-mq"
 import vuetify from './plugins/vuetify'
-import './style/style.css'
 import { loadFonts } from './plugins/webfontloader'
 
 loadFonts()
@@ -10,4 +10,7 @@ loadFonts()
 createApp(App)
   .use(vuetify)
   .use(router)
-  .mount('#app')
+  .use(Vue3Mq, {
+    preset: 'vuetify'
+  })
+  .mount('#app');
