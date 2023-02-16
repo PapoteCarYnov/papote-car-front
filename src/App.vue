@@ -1,23 +1,19 @@
 <template>
-  <v-app>
+  <v-app id="app">
     <v-main>
-      <HelloWorld/>
+      <router-view/>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
 export default {
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data: () => ({
-    //
-  }),
+  name: 'App'
 }
 </script>
+<style scoped>
+#app {
+  background-color: #FFFBF7;
+}
+</style>
