@@ -1,5 +1,6 @@
 <template>
   <v-container>
+    <MyHeader/>
     <v-row class="text-center">
       <v-col cols="12">
         <v-img
@@ -93,9 +94,14 @@
 </template>
 
 <script>
+import MyHeader from './MyHeader.vue'
 
 export default {
   name: 'HelloWorld',
+
+  components: {
+    MyHeader,
+  },
 
   data: () => ({
     ecosystem: [
