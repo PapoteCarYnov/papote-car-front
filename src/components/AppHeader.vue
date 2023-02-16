@@ -3,7 +3,8 @@
     <MqResponsive target="sm+">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
-          <v-img width="150" src="../assets/papotecar_logo.svg"> </v-img>
+          <v-img width="150" src="../assets/papotecar_logo.svg" @click="toHome">
+          </v-img>
         </template>
         <v-spacer />
         <v-btn variant="outlined" class="header-button" color="#F58926">
@@ -17,7 +18,8 @@
     <MqResponsive target="xs">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
-          <v-img width="150" src="../assets/papotecar_logo.svg"> </v-img>
+          <v-img width="150" src="../assets/papotecar_logo.svg" @click="toHome">
+          </v-img>
         </template>
         <v-spacer />
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -28,7 +30,7 @@
         location="top"
         width="120"
       >
-        <v-row>
+        <v-row justify="center">
           <v-col cols="12" align-self="center">
             <v-btn variant="outlined" class="header-button" color="#F58926">
               Connexion
@@ -36,7 +38,7 @@
           </v-col>
         </v-row>
 
-        <v-row>
+        <v-row justify="center">
           <v-col cols="12" align-self="center">
             <v-btn class="header-button header-button-background">
               Inscription
@@ -50,6 +52,7 @@
 
 <script>
 import { MqResponsive } from "vue3-mq";
+import router from "../router/index.js";
 
 export default {
   name: "AppHeader",
@@ -61,6 +64,12 @@ export default {
   data: () => ({
     drawer: false,
   }),
+
+  methods: {
+    toHome() {
+      router.push("/");
+    },
+  },
 
   inject: ["mq"],
 };
@@ -79,9 +88,10 @@ export default {
 :deep(.burger-menu) {
   background-color: #fffbf7;
   padding-top: 10px;
+  align-self: center;
 }
 
 .v-navigation-drawer__content {
-    align-self: center;
+  align-self: center;
 }
 </style>
