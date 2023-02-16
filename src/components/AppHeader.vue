@@ -3,31 +3,17 @@
     <MqResponsive target="sm+">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
-          <v-img width="150" src="../assets/papotecar_logo.svg" @click="toHome">
-          </v-img>
+          <HeaderLogo></HeaderLogo>
         </template>
         <v-spacer />
-        <router-link
-          :to="{ name: 'login', force: true, state: { login: true } }"
-        >
-          <v-btn variant="outlined" class="header-button" color="#F58926">
-            Connexion
-          </v-btn>
-        </router-link>
-        <router-link
-          :to="{ name: 'login', force: true, state: { login: false } }"
-        >
-          <v-btn class="header-button header-button-background">
-            Inscription
-          </v-btn>
-        </router-link>
+        <ConnectButton></ConnectButton>
+        <LoginButton></LoginButton>
       </v-app-bar>
     </MqResponsive>
     <MqResponsive target="xs">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
-          <v-img width="150" src="../assets/papotecar_logo.svg" @click="toHome">
-          </v-img>
+          <HeaderLogo></HeaderLogo>
         </template>
         <v-spacer />
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
@@ -40,25 +26,13 @@
       >
         <v-row>
           <v-col cols="12" class="text-center">
-            <router-link
-              :to="{ name: 'login', force: true, state: { login: true } }"
-            >
-              <v-btn variant="outlined" class="header-button" color="#F58926">
-                Connexion
-              </v-btn>
-            </router-link>
+            <ConnectButton></ConnectButton>
           </v-col>
         </v-row>
 
         <v-row>
           <v-col cols="12" class="text-center">
-            <router-link
-              :to="{ name: 'login', force: true, state: { login: false } }"
-            >
-              <v-btn class="header-button header-button-background">
-                Inscription
-              </v-btn>
-            </router-link>
+            <LoginButton></LoginButton>
           </v-col>
         </v-row>
       </v-navigation-drawer>
@@ -69,12 +43,18 @@
 <script>
 import { MqResponsive } from "vue3-mq";
 import router from '../router/index.js';
+import HeaderLogo from './header/HeaderLogo.vue';
+import ConnectButton from './header/ConnectButton.vue';
+import LoginButton from './header/LoginButton.vue';
 
 export default {
   name: "AppHeader",
 
   components: {
     MqResponsive,
+    HeaderLogo,
+    ConnectButton,
+    LoginButton,
   },
 
   data: () => ({
@@ -95,15 +75,6 @@ export default {
 a {
   color: inherit;
   text-decoration: inherit;
-}
-
-.header-button {
-  margin-right: 10px;
-}
-
-.header-button-background {
-  background-color: #f58926;
-  color: white;
 }
 
 :deep(.burger-menu) {
