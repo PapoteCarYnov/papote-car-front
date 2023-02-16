@@ -3,16 +3,28 @@
     <MqResponsive target="sm+">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
-          <v-img width="150" src="../assets/papotecar_logo.svg" @click="toHome">
-          </v-img>
+          <router-link
+            :to="{ name: '/', force: true}"
+          >
+            <v-img width="150" src="../assets/papotecar_logo.svg">
+            </v-img>
+          </router-link> 
         </template>
         <v-spacer />
-        <v-btn variant="outlined" class="header-button" color="#F58926">
-          Connexion
-        </v-btn>
-        <v-btn class="header-button header-button-background">
-          Inscription
-        </v-btn>
+        <router-link
+          :to="{ name: 'login', force: true, state: { login: true } }"
+        >
+          <v-btn variant="outlined" class="header-button" color="#F58926">
+            Connexion
+          </v-btn>
+        </router-link>
+        <router-link
+          :to="{ name: 'login', force: true, state: { login: false } }"
+        >
+          <v-btn class="header-button header-button-background">
+            Inscription
+          </v-btn>
+        </router-link>
       </v-app-bar>
     </MqResponsive>
     <MqResponsive target="xs">
@@ -32,17 +44,25 @@
       >
         <v-row justify="center">
           <v-col cols="12" align-self="center">
-            <v-btn variant="outlined" class="header-button" color="#F58926">
-              Connexion
-            </v-btn>
+            <router-link
+              :to="{ name: 'login', force: true, state: { login: true } }"
+            >
+              <v-btn variant="outlined" class="header-button" color="#F58926">
+                Connexion
+              </v-btn>
+            </router-link>
           </v-col>
         </v-row>
 
         <v-row justify="center">
           <v-col cols="12" align-self="center">
-            <v-btn class="header-button header-button-background">
-              Inscription
-            </v-btn>
+            <router-link
+              :to="{ name: 'login', force: true, state: { login: false } }"
+            >
+              <v-btn class="header-button header-button-background">
+                Inscription
+              </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-navigation-drawer>
@@ -52,7 +72,6 @@
 
 <script>
 import { MqResponsive } from "vue3-mq";
-import router from "../router/index.js";
 
 export default {
   name: "AppHeader",
@@ -65,17 +84,16 @@ export default {
     drawer: false,
   }),
 
-  methods: {
-    toHome() {
-      router.push("/");
-    },
-  },
-
   inject: ["mq"],
 };
 </script>
 
 <style scoped>
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 .header-button {
   margin-right: 10px;
 }

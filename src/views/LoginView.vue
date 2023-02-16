@@ -7,32 +7,32 @@
     <v-form v-model="valid" ref="form">
       <v-container>
         <v-row v-if="!login">
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field v-model="firstname" :rules="firstnameRules" label="Prénom" placeholder="Prénom" variant="underlined" required></v-text-field>
           </v-col>
         </v-row>
         <v-row v-if="!login">
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field v-model="lastname" :rules="lastnameRules" label="Nom" placeholder="Nom" variant="underlined" required></v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field v-model="mail" :rules="mailRules" label="Email" placeholder="Email" variant="underlined" required></v-text-field>
           </v-col>
         </v-row>
         <v-row v-if="!login">
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field v-model="birthdate" :rules="birthdateRules" type="date" variant="underlined" required></v-text-field>
           </v-col>
         </v-row>
         <v-row v-if="!login">
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field v-model="phone" :rules="phoneRules" type="phone" placeholder="Numéro de téléphone" variant="underlined" required></v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="12" md="3">
+          <v-col cols="12" md="12">
             <v-text-field
                 v-model="password"
                 :rules="passwordRules"
@@ -128,21 +128,25 @@ export default {
       }
     },
   },
-  created() {
+  updated() {
     this.login = window.history.state.login;
-  },
+  }
 }
 </script>
 <style scoped>
 h1 {
   font-weight: 700;
   text-align: center;
-  padding-top: 2em;
+  padding-top: 0.5em;
 }
 
 :deep(.v-row) {
   justify-content: center;
   height: 60px;
+}
+
+:deep(.v-col-12) {
+  flex: 0 0 30% !important;
 }
 
 :deep(.v-btn) {
@@ -154,9 +158,15 @@ h1 {
 
 #login {
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
   justify-content: flex-start;
+  min-height: 100%;
+}
+
+@media (max-width: 850px) {
+  :deep(.v-col-12) {
+    flex: 0 0 60% !important;
+  }
 }
 
 </style>
