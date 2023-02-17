@@ -1,5 +1,5 @@
 <template>
-  <v-img width="150" src="../../assets/papotecar_logo.svg" @click="toHome">
+  <v-img width="150" src="../../assets/papotecar_logo.svg" alt="Logo Papote Car" @click="toHome">
   </v-img>
 </template>
 
