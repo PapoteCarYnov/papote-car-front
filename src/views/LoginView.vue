@@ -102,22 +102,27 @@ export default {
       if (this.valid) {
         if (this.login) {
           authService.login({
-            email: this.email,
+            email: this.mail,
             password: this.password
           }).then((r) => {
-            console.log(r);
+            this.token = r.data.token;
+            console.log(this.token);
+          }).catch((e) => {
+            console.log(e);
           });
         } else {
           const userCreateDto = {
-            email: this.email,
+            email: this.mail,
             password: this.password,
             firstname: this.firstname,
             name: this.lastname,
             birthDate: this.birthdate,
             phone: this.phone,
           };
+          console.log(userCreateDto);
           authService.register(userCreateDto).then((r) => {
-            console.log(r.data);
+            this.token = r.data.token;
+            console.log(this.token);
           }).catch((e) => {
             console.log(e);
           })
@@ -127,9 +132,6 @@ export default {
   },
   updated() {
     this.login = window.history.state.login;
-  },
-  mounted() {
-    console.log(authService);
   }
 }
 </script>
