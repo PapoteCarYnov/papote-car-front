@@ -1,13 +1,13 @@
 import api from './axios';
 
-export default class MessageService {
+let exports = {};
 
-  sendMessage(messageDto) {
-    return api.post('/messages', messageDto);
-  }
-
-  getMessages(rideId) {
-    return api.get(`/messages/${rideId}`);
-  }
-
+exports.sendMessage = (messageDto) => {
+  return api.post('/messages', messageDto);
 }
+
+exports.getMessages = (rideId) => {
+  return api.get(`/messages/${rideId}`);
+}
+
+export default exports;

@@ -1,21 +1,21 @@
 import { api } from './axios';
 
-export default class UserService {
+let exports = {};
 
-  getUserById(id) {
-    return api.get(`/users/${id}`);
-  }
+exports.getUserById = (id) => {
+  return api.get(`/users/${id}`);
+};
 
-  getCurrentUser() {
-    return api.get(`/users/current`);
-  }
+exports.getCurrentUser = () => {
+  return api.get(`/users/current`);
+};
 
-  updateUser(userDto) {
-    return api.put('/users', userDto);
-  }
+exports.updateUser = (userDto) => {
+  return api.put('/users', userDto);
+};
 
-  deleteUser(id) {
-    return api.delete(`/users/${id}`);
-  }
+exports.deleteUser = (id) => {
+  return api.delete(`/users/${id}`);
+};
 
-}
+export default exports;

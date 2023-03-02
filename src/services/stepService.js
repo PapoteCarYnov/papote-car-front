@@ -1,13 +1,13 @@
 import api from './axios';
 
-export default class StepService {
+let exports = {};
 
-  addStep(stepDto) {
-    return api.post('/steps', stepDto);
-  }
+exports.addStep = (stepDto) => {
+  return api.post('/steps', stepDto);
+};
 
-  deleteStep(id) {
-    return api.delete(`/steps/${id}`);
-  }
+exports.deleteStep = (id) => {
+  return api.delete(`/steps/${id}`);
+};
 
-}
+export default exports;

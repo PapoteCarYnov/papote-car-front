@@ -1,21 +1,21 @@
 import api from './axios';
 
-export default class RideService {
+let exports = {};
 
-  createRide(rideDto) {
-    return api.post('/rides', rideDto);
-  }
+exports.createRide = (rideDto) => {
+  return api.post('/rides', rideDto);
+};
 
-  getRide(id) {
-    return api.get(`/rides/${id}`);
-  }
+exports.getRide = (id) => {
+  return api.get(`/rides/${id}`);
+};
 
-  updateRide(rideDto) {
-    return api.put('/rides', rideDto);
-  }
+exports.updateRide = (rideDto) => {
+  return api.put('/rides', rideDto);
+};
 
-  deleteRide(id) {
-    return api.delete(`/rides/${id}`);
-  }
+exports.deleteRide = (id) => {
+  return api.delete(`/rides/${id}`);
+};
 
-} 
+export default exports;
