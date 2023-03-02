@@ -60,11 +60,13 @@
 </template>
 
 <script>
+import authService from '../services/authService';
 
 export default {
   name: 'LoginView',
   data() {
     return {
+      token: '',
       login: false,
       show: false,
       valid: false,
@@ -99,37 +101,35 @@ export default {
     async submitForm () {
       if (this.valid) {
         if (this.login) {
-          await fetch("connexion", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password
-            }),
+          authService.login({
+            email: this.email,
+            password: this.password
+          }).then((r) => {
+            console.log(r);
           });
         } else {
-          await fetch("inscription", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password,
-              firstname: this.firstname,
-              lastname: this.lastname,
-              birthdate: this.birthdate,
-              phone: this.phone
-            }),
-          });
+          const userCreateDto = {
+            email: this.email,
+            password: this.password,
+            firstname: this.firstname,
+            name: this.lastname,
+            birthDate: this.birthdate,
+            phone: this.phone,
+          };
+          authService.register(userCreateDto).then((r) => {
+            console.log(r.data);
+          }).catch((e) => {
+            console.log(e);
+          })
         }
       }
     },
   },
   updated() {
     this.login = window.history.state.login;
+  },
+  mounted() {
+    console.log(authService);
   }
 }
 </script>
