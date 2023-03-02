@@ -118,7 +118,6 @@ export default {
             birthDate: this.birthdate,
             phone: this.phone,
           };
-          console.log(userCreateDto);
           authService.register(userCreateDto).then(() => {
             router.push("/");
           }).catch((e) => {
