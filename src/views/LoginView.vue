@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import authService from '../services/authService';
+import router from '../router/index.js';
 
 export default {
   name: 'LoginView',
@@ -101,34 +103,34 @@ export default {
       this.$refs.form.validate();
       if (this.valid) {
         if (this.login) {
-          await fetch("connexion", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password
-            }),
+          authService.login({
+            email: this.mail,
+            password: this.password
+          }).then((r) => {
+            this.registerToken(r.data);
+          }).catch((e) => {
+            console.log("Erreur :",e);
           });
         } else {
-          await fetch("inscription", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              email: this.email,
-              password: this.password,
-              firstname: this.firstname,
-              lastname: this.lastname,
-              birthdate: this.birthdate,
-              phone: this.phone
-            }),
-          });
+          const userCreateDto = {
+            email: this.mail,
+            password: this.password,
+            firstname: this.firstname,
+            name: this.lastname,
+            birthDate: this.birthdate,
+            phone: this.phone,
+          };
+          authService.register(userCreateDto).then(() => {
+            router.push("/");
+          }).catch((e) => {
+            console.log("Erreur :",e);
+          })
         }
       }
     },
+    registerToken(data) {
+      localStorage.setItem("user-token", data.token);
+    }
   },
   updated() {
     this.login = window.history.state.login;
