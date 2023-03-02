@@ -61,12 +61,12 @@
 
 <script>
 import authService from '../services/authService';
+import router from '../router/index.js';
 
 export default {
   name: 'LoginView',
   data() {
     return {
-      token: '',
       login: false,
       show: false,
       valid: false,
@@ -105,8 +105,7 @@ export default {
             email: this.mail,
             password: this.password
           }).then((r) => {
-            this.token = r.data.token;
-            console.log(this.token);
+            this.registerToken(r.data);
           }).catch((e) => {
             console.log(e);
           });
@@ -121,14 +120,17 @@ export default {
           };
           console.log(userCreateDto);
           authService.register(userCreateDto).then((r) => {
-            this.token = r.data.token;
-            console.log(this.token);
+            console.log(r);
+            router.push("/");
           }).catch((e) => {
             console.log(e);
           })
         }
       }
     },
+    registerToken(data) {
+      localStorage.setItem("user-token", data.token);
+    }
   },
   updated() {
     this.login = window.history.state.login;
