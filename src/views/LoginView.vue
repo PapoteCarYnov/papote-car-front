@@ -107,7 +107,7 @@ export default {
           }).then((r) => {
             this.registerToken(r.data);
           }).catch((e) => {
-            console.log(e);
+            console.log("Erreur :",e);
           });
         } else {
           const userCreateDto = {
@@ -119,11 +119,10 @@ export default {
             phone: this.phone,
           };
           console.log(userCreateDto);
-          authService.register(userCreateDto).then((r) => {
-            console.log(r);
+          authService.register(userCreateDto).then(() => {
             router.push("/");
           }).catch((e) => {
-            console.log(e);
+            console.log("Erreur :",e);
           })
         }
       }
