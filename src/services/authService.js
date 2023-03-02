@@ -1,13 +1,13 @@
 import { api } from './axios';
 
-export default class AuthService {
+let exports = {};
 
-  register(userCreateDto) {
+exports.register = (userCreateDto) => {
     return api.post('/auth/register', userCreateDto);
-  }
+}
 
-  logIn(authDto) {
+exports.logIn = (authDto) => {
     return api.post('/auth/login', authDto);
-  }
+}
 
-} 
+export default exports;
