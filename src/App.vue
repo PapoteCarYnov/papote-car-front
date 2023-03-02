@@ -21,5 +21,6 @@ export default {
 <style scoped>
 #app {
   background-color: #FFFBF7;
+  font-family: 'Poppins', sans-serif;
 }
 </style>

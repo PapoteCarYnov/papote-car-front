@@ -52,6 +52,7 @@
     </v-form>
     <div style="margin-top: auto">
       <v-img
+          aria-hidden=true
           :src="require('../assets/footerAuthentification.svg')"
           cover
       ></v-img>
@@ -85,7 +86,7 @@ export default {
         v => /.+@.+/.test(v) || 'Le mail doit être valide',
       ],
       birthdateRules: [
-          v => !!v || "Ce champs est requis."
+          v => !!v || "Ce champs est requis"
       ],
       phoneRules: [
           v => /^\d{10}$/.test(v) || "Le numéro de téléphone n'est pas valide"
@@ -97,6 +98,7 @@ export default {
   },
   methods: {
     async submitForm () {
+      this.$refs.form.validate();
       if (this.valid) {
         if (this.login) {
           await fetch("connexion", {
