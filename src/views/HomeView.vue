@@ -39,7 +39,7 @@
                     <v-icon icon="mdi-calendar-blank" />
                   </v-col>
                   <v-col cols="4" md="4">
-                    <v-text-field v-model="date" :rules="dateRules" type="date" label="Date de départ" placeholder="Date de départ" variant="underlined" required></v-text-field>
+                    <Datepicker v-model="date" :rules="dateRules" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
                   </v-col>
                   <v-col id="col" cols="1" md="1">
                   </v-col>
@@ -78,7 +78,7 @@
                     <v-icon icon="mdi-calendar-blank" />
                   </v-col>
                   <v-col cols="10" md="10">
-                    <v-text-field v-model="date" :rules="dateRules" type="date" label="Date de départ" placeholder="Date de départ" variant="underlined" required></v-text-field>
+                    <Datepicker v-model="date" :rules="dateRules" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -233,16 +233,21 @@
 
 <script>
 import { MqResponsive } from "vue3-mq";
+import Datepicker from 'vue3-datepicker';
+import { ref } from 'vue'
+const date = ref(new Date())
+import { fr } from 'date-fns/locale';
 
 export default {
   name: 'HomeView',
-  components: {MqResponsive},
+  components: {MqResponsive, Datepicker},
   data() {
     return {
       valid: false,
       start: null,
       end: null,
-      date: null,
+      date: date,
+      locale: fr,
       nbPeople: null,
       startRules: [
         v => !!v || 'Ce champ est requis'
@@ -270,7 +275,7 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 #home {
   display: flex;
   flex-direction: row;
@@ -305,6 +310,10 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
+}
+
+.v3dp__datepicker {
+  border-bottom: 1px #b4b4b4 solid;
 }
 
 #button {
