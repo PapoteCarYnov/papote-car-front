@@ -20,9 +20,8 @@ const routes = [
     path: '/booking',
     name: 'booking',
     component: BookingView
-  }, {
-
-  
+  }, 
+  {
     path: '/search',
     name: 'search',
     component: SearchView
