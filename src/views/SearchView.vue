@@ -161,6 +161,7 @@
         </div>
       </div>
     </section>
+    <AppFooter />
   </v-container>
 </template>
 
@@ -170,10 +171,11 @@ import Datepicker from 'vue3-datepicker';
 import { ref } from 'vue'
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
+import AppFooter from "@/components/AppFooter.vue";
 
 export default {
   name: 'SearchView',
-  components: {MqResponsive, Datepicker},
+  components: {AppFooter, MqResponsive, Datepicker},
   data() {
     return {
       open: false,
