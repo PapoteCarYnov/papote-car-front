@@ -1,7 +1,7 @@
 <template>
   <div id="roadmap">
     <h1 style="text-align: center; padding: 2em 0;">Votre plan de route</h1>
-    <div class="results">
+    <div v-if="!empty" class="results">
       <h2>A venir</h2><br />
       <p style="font-weight: bold;">Vendredi 10 mars</p>
       <v-card :class="`${driver ? 'driver' : 'card'}`">
@@ -24,7 +24,7 @@
         </div>
       </v-card>
     </div>
-    <div class="results">
+    <div v-if="!empty" class="results">
       <h2>En cours</h2><br />
       <v-card :class="`${driver ? 'driver' : 'card'}`">
         <div style="display: flex; flex-direction: row; padding-left: 2%;">
@@ -46,15 +46,20 @@
         </div>
       </v-card>
     </div>
+    <div v-if="empty" class="empty">
+      <v-img style="margin: auto; display: block;" :src="require('../assets/first_car.svg')" width="500px" id="car"></v-img>
+      <h2>Aucun voyage prévu !</h2><br />
+      <v-btn id="button">TROUVER UN TRAJET</v-btn>
+    </div>
     <v-card id="driver">
       <v-img :src="require('../assets/car.svg')" width="200px" id="car"></v-img>
       <div class="create">
         <h2>Vous êtes conducteur ?</h2>
         <p>Trouvez votre compagnon de route pour papoter avec vous sur le trajet. Déposez votre annonce et vous n’aurez plus qu’à choisir votre covoitureur !</p><br />
-        <v-btn id="create">CRÉER VOTRE ANNONCE</v-btn>
+        <v-btn id="button">CRÉER VOTRE ANNONCE</v-btn>
       </div>
     </v-card>
-    <div class="results">
+    <div v-if="!empty" class="results">
       <h2>Vos anciens trajets</h2><br />
       <p style="font-weight: bold;">Jeudi 2 mars</p>
       <v-card :class="`${driver ? 'driver' : 'card'}`">
@@ -90,7 +95,8 @@ export default {
   components: {AppFooter},
   data() {
     return {
-      driver: false
+      driver: false,
+      empty: true
     }
   }
 }
@@ -167,9 +173,13 @@ export default {
   padding-left: 5em;
 }
 
-#create {
+#button {
   background-color: #F58926;
   color: #FFFBF7;
+}
+
+.empty {
+  text-align: center;
 }
 
 @media (max-width: 1250px) {
