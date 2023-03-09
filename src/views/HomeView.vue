@@ -225,9 +225,7 @@
         <p>Fais avec <span style="color: #F58926">❤</span> par les Renards Temporaire</p>
       </div>
     </section>
-    <section style="background-color: #361E09; margin-top: 2em;">
-      <p style="color: #FFFBF7; font-size: 14px; padding: 2em 8em;">Conditions générales d'utilisation</p>
-    </section>
+    <AppFooter />
   </v-container>
 </template>
 
@@ -235,12 +233,13 @@
 import { MqResponsive } from "vue3-mq";
 import Datepicker from 'vue3-datepicker';
 import { ref } from 'vue'
+import AppFooter from "@/components/AppFooter.vue";
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
 
 export default {
   name: 'HomeView',
-  components: {MqResponsive, Datepicker},
+  components: {MqResponsive, Datepicker, AppFooter},
   data() {
     return {
       valid: false,
