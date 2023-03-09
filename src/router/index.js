@@ -3,6 +3,7 @@ import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import BookingView from "@/views/BookingView.vue";
 import SearchView from "@/views/SearchView.vue";
+import RoadmapView from "@/views/RoadmapView.vue";
 import NotFound from "@/views/NotFoundView.vue";
 
 const routes = [
@@ -25,6 +26,11 @@ const routes = [
     path: '/search',
     name: 'search',
     component: SearchView
+  },
+  {
+    path: '/roadmap',
+    name: 'roadmap',
+    component: RoadmapView
   },
   { path: '/404', component: NotFound },
   { path: '/:catchAll(.*)', redirect: '/404' }
