@@ -5,9 +5,14 @@
 npm install
 ```
 
-### Compiles and hot-reloads for development
+## Compiles and hot-reloads for development
 ```
 npm run serve
+```
+
+### Start the server on another port (when launching the back locally)
+```
+npm run serve -- --port 8081
 ```
 
 ### Compiles and minifies for production
