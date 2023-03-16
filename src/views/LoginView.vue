@@ -34,14 +34,15 @@
         <v-row>
           <v-col cols="12" md="12">
             <v-text-field
-                v-model="password"
-                :rules="passwordRules"
-                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-                label="Mot de passe"
-                :type="show ? 'text' : 'password'"
-                @click:append="show = !show"
-                hint="At least 8 characters"
-                variant="underlined" counter required></v-text-field>
+              v-model="password"
+              :rules="passwordRules"
+              :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+              label="Mot de passe"
+              :type="show ? 'text' : 'password'"
+              @click:append="show = !show"
+              hint="At least 8 characters"
+              variant="underlined" counter required
+            ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -52,9 +53,9 @@
     </v-form>
     <div style="margin-top: auto">
       <v-img
-          aria-hidden=true
-          :src="require('../assets/footerAuthentification.svg')"
-          cover
+        aria-hidden=true
+        :src="require('../assets/footerAuthentification.svg')"
+        cover
       ></v-img>
     </div>
   </div>
@@ -108,6 +109,7 @@ export default {
             password: this.password
           }).then((r) => {
             this.registerToken(r.data);
+            router.push("/");
           }).catch((e) => {
             console.log("Erreur :",e);
           });
@@ -129,7 +131,7 @@ export default {
       }
     },
     registerToken(data) {
-      localStorage.setItem("user-token", data.token);
+      localStorage.setItem("user-token", data.token, 1000 * 60 * 24);
     }
   },
   updated() {

@@ -52,4 +52,12 @@ const router = createRouter({
   routes
 });
 
+// eslint-disable-next-line
+// router.beforeEach(async (to, from) => {
+//   console.log(to.name);
+//   if (!localStorage.getItem("user-token")) console.log("no token");
+//   else console.log("token ^^ ");
+//   return { name: to.name };
+// });
+
 export default router;

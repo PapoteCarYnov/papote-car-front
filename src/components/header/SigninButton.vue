@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: "LoginButton"
+  name: "SigninButton"
 }
 </script>
 <style scoped>
