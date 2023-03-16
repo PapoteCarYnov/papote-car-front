@@ -110,7 +110,6 @@ export default {
           }).then((r) => {
             this.registerToken(r.data);
             router.push("/");
-            window.location.reload();
           }).catch((e) => {
             console.log("Erreur :",e);
           });
@@ -124,7 +123,6 @@ export default {
             phone: this.phone,
           };
           authService.register(userCreateDto).then(() => {
-            window.location.reload();
             router.push("/");
           }).catch((e) => {
             console.log("Erreur :",e);

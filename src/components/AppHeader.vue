@@ -31,19 +31,19 @@
         v-bind:width="isLoggedIn ? 210 : 150"
       >
 
-        <v-row v-if="isLoggedIn">
+        <v-row v-if="isLoggedIn" class="nav-menu">
           <v-col cols="11" class="text-center">
             <CreateButton></CreateButton>
           </v-col>
         </v-row>
 
-        <v-row v-if="isLoggedIn">
+        <v-row v-if="isLoggedIn" class="nav-menu">
           <v-col cols="11" class="text-center">
             <RoadmapButton></RoadmapButton>
           </v-col>
         </v-row>
 
-        <v-row v-if="isLoggedIn">
+        <v-row v-if="isLoggedIn" class="nav-menu">
           <v-col cols="11" class="text-center">
             <SearchButton></SearchButton>
           </v-col>
@@ -127,6 +127,10 @@ a {
 :deep(.burger-menu) {
   background-color: #fffbf7;
   padding-top: 10px;
+}
+
+.nav-menu {
+  padding-left: 30px;
 }
 
 </style>

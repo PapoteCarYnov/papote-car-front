@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'search'}">
+  <router-link :to="{ name: 'roadmap'}">
     <div class="roadmap-button">
       <v-icon icon="mdi-car" aria-hidden="true" /> 
       <span class="button-text">Plan de route</span>
