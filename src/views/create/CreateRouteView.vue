@@ -50,8 +50,29 @@
         <p>Les petites pauses c'est essentielles !</p>
       </div>
       <div id="right">
-        <v-btn id="button">AJOUTER UNE ETAPE</v-btn>
-        <p>Tu pourras récupérer d'autres compagnons de voyage.</p>
+        <div v-for="index in steps" :key="index">
+          <div v-if="step" id="step">
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-map-marker" />
+              </v-col>
+              <v-col cols="8" md="8">
+                <v-text-field v-model="address[index]" label="Adresse" placeholder="Adresse" variant="underlined" required></v-text-field>
+              </v-col>
+              <v-icon id="close" icon="mdi-close" @click="close(index)" />
+            </v-row>
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-clock-outline" />
+              </v-col>
+              <v-col cols="4" md="4">
+                <VueTimePicker id="time" format="HH:mm:ss" v-model="stepTime[index]" required></VueTimePicker>
+              </v-col>
+            </v-row>
+          </div>
+        </div>
+        <v-btn id="button" @click="add()">AJOUTER UNE ETAPE</v-btn>
+        <p v-if="!step">Tu pourras récupérer d'autres compagnons de voyage.</p>
       </div>
     </div>
     <div id="route">
@@ -109,6 +130,11 @@
         time: null,
         color: null,
         model: null,
+        step: false,
+        numberStep: 0,
+        steps: [],
+        address: [],
+        stepTime: [],
         startRules: [
           v => !!v || 'Ce champ est requis'
         ],
@@ -144,6 +170,16 @@
         const start = this.start;
         this.start = this.end;
         this.end = start;
+      },
+
+      add() {
+        this.step = true;
+        this.numberStep = this.numberStep + 1;
+        this.steps.push(this.numberStep);
+      },
+
+      close(id) {
+        this.steps.splice(this.steps.indexOf(id), 1);
       }
     }
   }
@@ -173,6 +209,20 @@
   box-shadow: rgb(0 0 0 / 20%) 0 12px 28px 0, rgb(0 0 0 / 10%) 0 2px 4px 0, rgb(255 255 255 / 5%) 0 0 0 1px inset;
   padding: 2em 0;
   width: 70%;
+}
+
+#step {
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 20%) 0 12px 28px 0, rgb(0 0 0 / 10%) 0 2px 4px 0, rgb(255 255 255 / 5%) 0 0 0 1px inset;
+  padding: 2em 0;
+  margin-bottom: 2em;
+}
+
+#close {
+  margin-left: 15%;
+  margin-top: -50px;
 }
 
 #destination {
@@ -248,6 +298,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
     align-items: center;
     margin-left: 0;
+  }
+
+  #step {
+    width: 70%;
+    margin-left: 15%;
   }
 
   #left {
