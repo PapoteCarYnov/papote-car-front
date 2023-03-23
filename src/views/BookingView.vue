@@ -112,13 +112,14 @@
     </div>
 
     <v-row class="center-row">
-      <v-btn class="continue-button"> Continuer </v-btn>
+      <v-btn class="continue-button" @click="router.push({ path: 'login' });"> Continuer </v-btn>
     </v-row>
 
   </div>
 </template>
 <script>
 import { MqResponsive } from "vue3-mq";
+import router from "@/router";
 
 export default {
   name: 'BookingView',
@@ -156,8 +157,12 @@ export default {
         '8 personnes',
       ]
     }
-  }
-  
+  },
+  computed: {
+    router() {
+      return router
+    }
+  },
 }
 </script>
 <style scoped>

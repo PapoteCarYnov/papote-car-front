@@ -138,7 +138,7 @@
             <p>Heure de départ</p>
           </div>
           <div>
-            <v-card class="card">
+            <v-card class="card" @click="router.push({ path: 'booking' });">
               <div style="display: flex; flex-direction: row; padding-left: 2%;">
                 <ul class="padding">
                   <li>6h</li>
@@ -170,6 +170,7 @@ import Datepicker from 'vue3-datepicker';
 import { ref } from 'vue'
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
+import router from "@/router";
 
 export default {
   name: 'SearchView',
@@ -198,6 +199,11 @@ export default {
       showResult: false,
       zone: null,
       hour: null
+    }
+  },
+  computed: {
+    router() {
+      return router
     }
   },
   methods: {

@@ -234,6 +234,7 @@ import Datepicker from 'vue3-datepicker';
 import { ref } from 'vue'
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
+import router from "@/router";
 
 export default {
   name: 'HomeView',
@@ -263,6 +264,7 @@ export default {
   methods: {
     async submitForm() {
       this.$refs.form.validate();
+      router.push("/search");
     },
     changeDestination() {
       const start = this.start;

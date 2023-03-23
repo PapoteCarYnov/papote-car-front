@@ -26,8 +26,8 @@
           </div>
         </v-card>
         <div class="button">
-          <v-btn id="previous">Précédent</v-btn>
-          <v-btn id="next">Suivant</v-btn>
+          <v-btn id="previous" @click="router.push({ path: 'create-route' });">Précédent</v-btn>
+          <v-btn id="next" @click="router.push({ path: 'summary' });">Suivant</v-btn>
         </div>
       </div>
     </div>
@@ -36,8 +36,15 @@
 
 <script>
 
+import router from "@/router";
+
 export default {
   name: 'PriceView',
+  computed: {
+    router() {
+      return router
+    }
+  },
   data() {
     return {
       price: 0

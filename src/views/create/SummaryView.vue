@@ -35,8 +35,8 @@
           </div>
         </div>
         <div class="button">
-          <v-btn id="previous">Précédent</v-btn>
-          <v-btn id="next">Publier</v-btn>
+          <v-btn id="previous" @click="router.push({ path: 'price' });">Précédent</v-btn>
+          <v-btn id="next" @click="router.push({ path: 'roadmap' });">Publier</v-btn>
         </div>
       </div>
     </div>
@@ -45,8 +45,15 @@
 
 <script>
 
+import router from "@/router";
+
 export default {
-  name: 'SummaryView'
+  name: 'SummaryView',
+  computed: {
+    router() {
+      return router
+    }
+  },
 }
 </script>
 <style scoped>
