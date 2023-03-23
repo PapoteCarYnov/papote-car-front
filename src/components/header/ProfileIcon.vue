@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'search'}">
+  <router-link :to="{ name: 'profile'}">
     <div class="profile-icon">
       <v-icon icon="mdi-account-circle-outline"/> 
     </div>
