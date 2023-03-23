@@ -1,4 +1,4 @@
-import { api } from './axios';
+import { api, config } from './axios';
 
 let exports = {};
 
@@ -7,7 +7,7 @@ exports.getUserById = (id) => {
 };
 
 exports.getCurrentUser = () => {
-  return api.get(`/users/current`);
+  return api.get(`/users/current`, config);
 };
 
 exports.updateUser = (userDto) => {

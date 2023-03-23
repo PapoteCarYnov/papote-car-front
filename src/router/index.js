@@ -4,6 +4,7 @@ import LoginView from "@/views/LoginView.vue";
 import BookingView from "@/views/BookingView.vue";
 import SearchView from "@/views/SearchView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
+import ProfileView from "@/views/ProfileView.vue";
 import CreateRouteView from "@/views/create/CreateRouteView.vue";
 import PriceView from "@/views/create/PriceView.vue";
 import SummaryView from "@/views/create/SummaryView.vue";
@@ -37,6 +38,11 @@ const routes = [
     component: RoadmapView
   },
   {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
+  },
+  {
     path: '/create-route',
     name: 'create-route',
     component: CreateRouteView
@@ -60,22 +66,9 @@ const routes = [
   { path: '/:catchAll(.*)', redirect: '/404' }
 ];
 
-// function beforeEnter(to, from, next) {
-//   if (localStorage.getItem("user-token")) next();
-//   else next('/');
-// }
-
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 });
-
-// eslint-disable-next-line
-// router.beforeEach(async (to, from) => {
-//   console.log(to.name);
-//   if (!localStorage.getItem("user-token")) console.log("no token");
-//   else console.log("token ^^ ");
-//   return { name: to.name };
-// });
 
 export default router;
