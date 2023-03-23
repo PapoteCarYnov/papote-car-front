@@ -104,23 +104,27 @@
       </div>
     </div>
     <div style="text-align: center;">
-      <v-btn id="button">SUIVANT</v-btn>
+      <v-btn id="button" @click="router.push({ path: 'price' });">SUIVANT</v-btn>
     </div>
   </div>
-  <AppFooter />
 </template>
 <script>
-  import AppFooter from "@/components/AppFooter.vue";
   import Datepicker from 'vue3-datepicker';
   import {fr} from "date-fns/locale";
   import {ref} from "vue";
   import VueTimePicker from "vue3-timepicker";
   import "vue3-timepicker/dist/VueTimepicker.css";
-  const date = ref(new Date())
+  const date = ref(new Date());
+  import router from "@/router";
 
   export default {
     name: "CreateRouteView",
-    components: {AppFooter, Datepicker, VueTimePicker},
+    computed: {
+      router() {
+        return router
+      }
+    },
+    components: {Datepicker, VueTimePicker},
     data() {
       return {
         start: null,

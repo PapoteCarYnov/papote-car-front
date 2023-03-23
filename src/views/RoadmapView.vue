@@ -82,17 +82,13 @@
         </div>
       </v-card>
     </div>
-    <AppFooter />
   </div>
 </template>
 
 <script>
 
-import AppFooter from "@/components/AppFooter.vue";
-
 export default {
   name: 'RoadmapView',
-  components: {AppFooter},
   data() {
     return {
       driver: false,
