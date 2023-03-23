@@ -5,6 +5,7 @@ import BookingView from "@/views/BookingView.vue";
 import SearchView from "@/views/SearchView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
 import CreateRouteView from "@/views/create/CreateRouteView.vue";
+import PriceView from "@/views/create/PriceView.vue";
 import NotFound from "@/views/NotFoundView.vue";
 
 const routes = [
@@ -35,8 +36,13 @@ const routes = [
   },
   {
     path: '/create-route',
-    name: 'creete-route',
+    name: 'create-route',
     component: CreateRouteView
+  },
+  {
+    path: '/price',
+    name: 'price',
+    component: PriceView
   },
   { path: '/404', component: NotFound },
   { path: '/:catchAll(.*)', redirect: '/404' }
