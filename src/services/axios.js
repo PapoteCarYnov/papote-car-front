@@ -8,7 +8,6 @@ const token = localStorage.getItem('user-token');
 
 export const config = {
   headers: { 
-    Authorization: `Bearer ${token}`,
-    'Access-Control-Allow-Origin': 'http://localhost:8081',
+    Authorization: `Bearer ${token}`
   }
 };
