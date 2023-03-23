@@ -2,7 +2,7 @@
   <div style="margin-bottom: 1em;">
     <div>
       <div>
-        <h1 style="text-align: center; padding: 2em 0 0 0;">Fixer vos prix</h1>
+        <h1 style="text-align: center; padding: 2em 0 0 0;">Récapitulatif</h1>
       </div>
       <div class="content">
         <h2 style="padding: 1em 0;">Vendredi 10 mars 2023</h2>
@@ -19,15 +19,24 @@
               </ul>
             </div>
             <div class="lastItem">
-              <v-btn id="less" @click="less">-</v-btn>
-              <v-text-field v-model="price" class="inputPrice" type="number" id="price" variant="underlined"></v-text-field>
-              <v-btn id="more" @click="more">+</v-btn>
+              <p>9€</p>
             </div>
           </div>
         </v-card>
+        <div style="margin-bottom: 2em;">
+          <span><span>Prix total pour 1 pasager sur tout le trajet: </span><span style="font-weight: bold; font-size: 24px;">18.50€</span></span>
+          <hr style="margin: 2em 0; height: 2px; background-color: #333;">
+          <div style="display: flex; flex-direction: row; justify-content: space-between;">
+            <span>Votre véhicule:</span>
+            <div style="display: flex; flex-direction: column; text-align: right;">
+              <span>OPEL GRANLAND X</span>
+              <span>Blanc</span>
+            </div>
+          </div>
+        </div>
         <div class="button">
           <v-btn id="previous">Précédent</v-btn>
-          <v-btn id="next">Suivant</v-btn>
+          <v-btn id="next">Publier</v-btn>
         </div>
       </div>
     </div>
@@ -37,21 +46,7 @@
 <script>
 
 export default {
-  name: 'PriceView',
-  data() {
-    return {
-      price: 0
-    }
-  },
-  methods: {
-    less() {
-      if (this.price <= 0) this.price = 0;
-      else this.price = this.price - 1;
-    },
-    more() {
-      this.price = this.price + 1;
-    }
-  }
+  name: 'SummaryView'
 }
 </script>
 <style scoped>
@@ -105,21 +100,6 @@ export default {
   font-weight: bold;
 }
 
-.inputPrice >>> input[type="number"] {
-  -moz-appearance: textfield;
-}
-.inputPrice >>> input::-webkit-outer-spin-button,
-.inputPrice >>> input::-webkit-inner-spin-button {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-.inputPrice >>> input {
-  text-align: right;
-  width: 50px;
-}
-
 .ul {
   display: flex;
   flex-direction: row;
@@ -133,28 +113,8 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-#less {
-  box-shadow: none;
-  border: 1px solid black;
-  border-radius: 10em;
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  padding: 0;
-  margin-right: 1em;
-}
-
-#more {
-  box-shadow: none;
-  border: 1px solid black;
-  border-radius: 28px;
-  width: 30px;
-  height: 30px;
-  min-width: 30px;
-  padding: 0;
-  margin-left: 1em;
+  font-weight: bold;
+  margin-top: -40px;
 }
 
 .button {
@@ -183,15 +143,6 @@ export default {
     margin-left: 25%;
   }
 
-  .contentCard {
-    flex-direction: column;
-  }
-
-  .lastItem {
-    margin-left: 0;
-    padding-right: 0;
-  }
-
   .ul {
     width: 100%;
   }
@@ -208,8 +159,7 @@ export default {
   }
 
   .lastItem {
-    margin-left: 0;
-    padding-right: 0;
+    margin-top: 0;
   }
 
   .ul {
