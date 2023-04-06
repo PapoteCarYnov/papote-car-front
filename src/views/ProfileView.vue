@@ -80,7 +80,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-btn @click="submitForm">Enregistrer</v-btn>
+          <v-btn class="form-button" @click="submitForm">Enregistrer</v-btn>
         </v-row>
       </v-container>
     </v-form>
@@ -120,7 +120,7 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-btn @click="submitFormPassword">Enregistrer</v-btn>
+          <v-btn class="form-button" @click="submitFormPassword">Enregistrer</v-btn>
         </v-row>
       </v-container>
     </v-form>
@@ -196,16 +196,14 @@ export default {
   },
 
   mounted() {
-    console.log(userService.getCurrentUser());
-    // if(userService.getCurrentUser() === null) {
-    //   console.log(":(");
-    // }
-    if(this.mockUser !== null) {
-      this.firstname = this.mockUser.firstname;
-      this.lastname = this.mockUser.name;
-      this.mail = this.mockUser.email;
-      this.birthdate = this.mockUser.birthDate;
-    }
+    userService.getCurrentUser().then((r) => {
+      this.firstname = r.data.firstname;
+      this.lastname = r.data.name;
+      this.mail = r.data.email;
+      this.birthdate = r.data.birthDate;
+    }).catch((e) => {
+      console.log("Erreur : ",e);
+    });
   }
 }
 </script>
@@ -222,6 +220,10 @@ h1 {
 
 .form-subtitle {
   font-size: 15px;
+}
+
+.form-button {
+  margin-top: 1em !important;
 }
 
 :deep(.v-row) {

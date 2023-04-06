@@ -12,6 +12,7 @@ export default {
   methods: {
     logout() {
       localStorage.removeItem("user-token");
+      this.emitter.emit("isLoggedIn", false);
       window.location.reload();
       router.push("/");
     }

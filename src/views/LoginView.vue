@@ -110,6 +110,7 @@ export default {
           }).then((r) => {
             this.registerToken(r.data);
             router.push("/");
+            this.emitter.emit("isLoggedIn", true);
           }).catch((e) => {
             console.log("Erreur :",e);
           });
@@ -126,7 +127,7 @@ export default {
             router.push("/");
           }).catch((e) => {
             console.log("Erreur :",e);
-          })
+          });
         }
       }
     },
