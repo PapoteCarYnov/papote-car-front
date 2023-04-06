@@ -4,6 +4,7 @@ import LoginView from "@/views/LoginView.vue";
 import BookingView from "@/views/BookingView.vue";
 import SearchView from "@/views/SearchView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
+import RideDetailView from "@/views/RideDetailView.vue";
 import ProfileView from "@/views/ProfileView.vue";
 import CreateRouteView from "@/views/create/CreateRouteView.vue";
 import PriceView from "@/views/create/PriceView.vue";
@@ -36,6 +37,11 @@ const routes = [
     path: '/roadmap',
     name: 'roadmap',
     component: RoadmapView
+  },
+  {
+    path: '/ride-detail',
+    name: 'ride-detail',
+    component: RideDetailView
   },
   {
     path: '/profile',
