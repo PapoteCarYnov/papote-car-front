@@ -127,7 +127,7 @@ export default {
             router.push("/");
           }).catch((e) => {
             console.log("Erreur :",e);
-          })
+          });
         }
       }
     },
