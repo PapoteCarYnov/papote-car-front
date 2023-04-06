@@ -19,6 +19,10 @@ export default {
     AppHeader,
     Footer
   },
+
+  created() {
+    this.emitter.emit("isLoggedIn", false);
+  }
 }
 </script>
 <style scoped>
