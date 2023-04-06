@@ -9,12 +9,12 @@
           <v-card class="card">
             <div style="display: flex; flex-direction: row; padding-left: 2%;">
               <ul class="padding">
-                <li>6h</li>
-                <li>7h</li>
+                <li>{{ startTime }}</li>
+                <li>{{ endTime }}</li>
               </ul>
               <ul class="bar">
-                <li>step 1</li>
-                <li>step 2</li>
+                <li>{{ startCity }}</li>
+                <li>{{ endCity }}</li>
               </ul>
               <div class="lastItem">
                 <p style="font-weight: bold;">9€</p><br/>
@@ -28,12 +28,12 @@
           <v-card class="card">
             <div style="display: flex; flex-direction: row; padding-left: 2%;">
               <ul class="padding">
-                <li>6h</li>
-                <li>7h</li>
+                <li>{{ startTime }}</li>
+                <li>{{ endTime }}</li>
               </ul>
               <ul class="bar">
-                <li>step 1</li>
-                <li>step 2</li>
+                <li>{{ startCity }}</li>
+                <li>{{ endCity }}</li>
               </ul>
             </div>
             <div style="padding-top: 5%;">
@@ -56,13 +56,13 @@
               Passager
             </v-col>
             <v-col>
-              Étape 1
+              {{ startCity }}
             </v-col>
             <v-col cols="2">
               <v-icon icon="mdi-arrow-right" aria-hidden="true" />
             </v-col>
             <v-col>
-              Étape 2
+              {{ endCity }}
             </v-col>
           </v-row>
         </MqResponsive>
@@ -75,7 +75,7 @@
           </v-row>
           <v-row>
             <v-col>
-              Étape 1
+              {{ startCity }}
             </v-col>
             <v-col>
               <v-icon icon="mdi-arrow-down" aria-hidden="true" />
@@ -83,7 +83,7 @@
           </v-row>
           <v-row>
             <v-col>
-              Étape 2
+              {{ endCity }}
             </v-col>
           </v-row>
         </MqResponsive>
@@ -106,7 +106,7 @@
         <h2>Futurs passagers</h2><br />
         <v-card class="card">
           <span style="font-weight: bold;">Eric</span> veut rejoindre votre trajet.<br/>
-          step 1 <v-icon icon="mdi-arrow-right" aria-hidden="true" /> step 2
+          {{ startCity }} <v-icon icon="mdi-arrow-right" aria-hidden="true" /> {{ endCity }}
         </v-card>
         <v-row class="valide-buttons">
           <v-col class="center-button">
@@ -150,6 +150,9 @@
 <script>
 import { MqResponsive } from "vue3-mq";
 import router from "@/router";
+import {useRoute} from "vue-router";
+import rideService from '../services/rideService.js';
+import userService from '../services/userService.js';
 
 export default {
   name: 'RideDetailView',
@@ -157,12 +160,37 @@ export default {
     MqResponsive,
   },
   data() {
+    return  {
+      id: null,
+      startTime: null,
+      endTime: null,
+      startCity: null,
+      endCity: null,
+    }
   },
   computed: {
     router() {
       return router
     }
   },
+  mounted() {
+    const route = useRoute();
+    this.id = route.params.id;
+    rideService.getRide(this.id).then((r) => {
+      console.log(r.data);
+      this.startTime = r.data.steps[0].time;
+      this.endTime = r.data.steps[1].time;
+      this.startCity = r.data.steps[0].city.name;
+      this.endCity = r.data.steps[1].city.name;
+    }).catch((e) => {
+      console.log("Erreur : ", e);
+    });
+    userService.getCurrentUser().then((r) => {
+      console.log(r);
+    }).catch((e) => {
+      console.log("Erreur : ", e);
+    });
+  }
 }
 </script>
 <style scoped>
