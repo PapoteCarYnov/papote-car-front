@@ -1,9 +1,9 @@
-import api from './axios';
+import { api, config } from './axios';
 
 let exports = {};
 
 exports.createRide = (rideDto) => {
-  return api.post('/rides', rideDto);
+  return api.post('/rides', rideDto, config);
 };
 
 exports.getRide = (id) => {
@@ -17,5 +17,9 @@ exports.updateRide = (rideDto) => {
 exports.deleteRide = (id) => {
   return api.delete(`/rides/${id}`);
 };
+
+exports.getCities = (name) => {
+  return api.get(`/cities?name=${name}`);
+}
 
 export default exports;

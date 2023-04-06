@@ -30,6 +30,10 @@
           <div :class="value[0] === 'Moi' ? 'me' : 'sms'">{{value[1]}}</div>
         </div>
       </div>
+      <div id="message">
+        <v-text-field style="padding-right: 1em;" v-model="message" label="Ecrivez un message" placeholder="Ecrivez un message"></v-text-field>
+        <v-icon style="padding-top: 1.3em;" icon="mdi-send"/>
+      </div>
     </div>
   </div>
 </template>
@@ -54,6 +58,7 @@ export default {
           ["Camille", "Super, merci ^^"],
           ["Camille", "Par contre, elle risque de miauler car elle aime pas prendre la voiture"],
       ],
+      message: null
     }
   },
   mounted() {
@@ -87,6 +92,7 @@ export default {
   position: fixed;
   overflow-y: auto;
   padding-bottom: 170px;
+  z-index: 1;
 }
 
 #menu::-webkit-scrollbar{
@@ -153,6 +159,12 @@ export default {
   width: 60%;
 }
 
+#message {
+  padding-right: 2em;
+  display: flex;
+  flex-direction: row;
+}
+
 @media (max-width: 960px) {
   #menu {
     width: 300px;
@@ -161,6 +173,7 @@ export default {
     position: fixed;
     overflow-y: auto;
     padding-bottom: 170px;
+    z-index: 1;
   }
 
   #content {
