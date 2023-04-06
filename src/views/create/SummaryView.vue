@@ -5,37 +5,37 @@
         <h1 style="text-align: center; padding: 2em 0 0 0;">Récapitulatif</h1>
       </div>
       <div class="content">
-        <h2 style="padding: 1em 0;">Vendredi 10 mars 2023</h2>
+        <h2 style="padding: 1em 0;">{{ date }}</h2>
         <v-card class="card">
           <div class="contentCard">
             <div class="ul">
               <ul class="padding">
-                <li>6h</li>
-                <li>7h</li>
+                <li>{{ startTime }}</li>
+                <li>{{ endTime }}</li>
               </ul>
               <ul class="bar">
-                <li>step 1</li>
-                <li>step 2</li>
+                <li>{{ step1 }}</li>
+                <li>{{ step2 }}</li>
               </ul>
             </div>
             <div class="lastItem">
-              <p>9€</p>
+              <p>{{ price }}</p>
             </div>
           </div>
         </v-card>
         <div style="margin-bottom: 2em;">
-          <span><span>Prix total pour 1 pasager sur tout le trajet: </span><span style="font-weight: bold; font-size: 24px;">18.50€</span></span>
+          <span><span>Prix total pour {{passenger}}</span><span v-if="passenger === 1">  passager</span><span v-else> passagers</span><span> sur tout le trajet: </span><span style="font-weight: bold; font-size: 24px;">{{ totalPrice }}</span></span>
           <hr style="margin: 2em 0; height: 2px; background-color: #333;">
           <div style="display: flex; flex-direction: row; justify-content: space-between;">
             <span>Votre véhicule:</span>
             <div style="display: flex; flex-direction: column; text-align: right;">
-              <span>OPEL GRANLAND X</span>
-              <span>Blanc</span>
+              <span></span>
+              <span></span>
             </div>
           </div>
         </div>
         <div class="button">
-          <v-btn id="previous" @click="router.push({ path: 'price' });">Précédent</v-btn>
+          <v-btn id="previous" @click="router.push({ name: 'price', params: {id: this.id} });">Précédent</v-btn>
           <v-btn id="next" @click="router.push({ path: 'roadmap' });">Publier</v-btn>
         </div>
       </div>
@@ -46,12 +46,42 @@
 <script>
 
 import router from "@/router";
+import {useRoute} from "vue-router";
+import rideService from "@/services/rideService";
+import moment from "moment/moment";
 
 export default {
   name: 'SummaryView',
+  async mounted() {
+    const route = useRoute();
+    this.id = route.params.id;
+    const ride = await rideService.getRide(this.id);
+    this.step1 = ride.data.steps[0]['city']['name'];
+    this.step2 = ride.data.steps[1]['city']['name'];
+    moment.locale('fr')
+    this.date = moment(ride.data.steps[0]['date'], 'Y/M/D').format('dddd D MMMM Y');
+    this.startTime = ride.data.steps[0]['time'];
+    this.endTime = ride.data.steps[1]['time'];
+  },
+  data() {
+    return {
+      price: 0,
+      step1: null,
+      step2: null,
+      id: null,
+      date: null,
+      startTime: null,
+      endTime: null,
+      passenger: 0
+    }
+  },
   computed: {
     router() {
       return router
+    },
+
+    totalPrice() {
+      return this.price * this.passenger;
     }
   },
 }

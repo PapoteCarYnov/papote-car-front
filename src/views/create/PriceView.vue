@@ -5,17 +5,17 @@
         <h1 style="text-align: center; padding: 2em 0 0 0;">Fixer vos prix</h1>
       </div>
       <div class="content">
-        <h2 style="padding: 1em 0;">Vendredi 10 mars 2023</h2>
+        <h2 style="padding: 1em 0;">{{ date }}</h2>
         <v-card class="card">
           <div class="contentCard">
             <div class="ul">
               <ul class="padding">
-                <li>6h</li>
-                <li>7h</li>
+                <li>{{ startTime }}</li>
+                <li>{{ endTime }}</li>
               </ul>
               <ul class="bar">
-                <li>step 1</li>
-                <li>step 2</li>
+                <li>{{ step1 }}</li>
+                <li>{{ step2 }}</li>
               </ul>
             </div>
             <div class="lastItem">
@@ -27,7 +27,7 @@
         </v-card>
         <div class="button">
           <v-btn id="previous" @click="router.push({ path: 'create-route' });">Précédent</v-btn>
-          <v-btn id="next" @click="router.push({ path: 'summary' });">Suivant</v-btn>
+          <v-btn id="next" @click="submit()">Suivant</v-btn>
         </div>
       </div>
     </div>
@@ -37,9 +37,25 @@
 <script>
 
 import router from "@/router";
+import { useRoute } from 'vue-router'
+import rideService from "@/services/rideService";
+import moment from 'moment';
 
 export default {
   name: 'PriceView',
+  async mounted() {
+    const route = useRoute();
+    this.id = route.params.id;
+    const ride = await rideService.getRide(this.id);
+    this.step1 = ride.data.steps[0]['city']['name'];
+    this.startStepId = ride.data.steps[0]['id'];
+    this.step2 = ride.data.steps[1]['city']['name'];
+    this.endStepId = ride.data.steps[1]['id'];
+    moment.locale('fr')
+    this.date = moment(ride.data.steps[0]['date'], 'Y/M/D').format('dddd D MMMM Y');
+    this.startTime = ride.data.steps[0]['time'];
+    this.endTime = ride.data.steps[1]['time'];
+  },
   computed: {
     router() {
       return router
@@ -47,7 +63,15 @@ export default {
   },
   data() {
     return {
-      price: 0
+      price: 0,
+      step1: null,
+      step2: null,
+      startStepId: null,
+      endStepId: null,
+      id: null,
+      date: null,
+      startTime: null,
+      endTime: null
     }
   },
   methods: {
@@ -57,6 +81,16 @@ export default {
     },
     more() {
       this.price = this.price + 1;
+    },
+    async submit() {
+      await rideService.updatePrice(
+          {
+            price: this.price,
+            startStepId: this.startStepId,
+            endStepId: this.endStepId,
+          }
+      )
+      await router.push({name: 'summary', params: {id: this.id}});
     }
   }
 }

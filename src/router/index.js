@@ -48,12 +48,12 @@ const routes = [
     component: CreateRouteView
   },
   {
-    path: '/price',
+    path: '/price/:id',
     name: 'price',
     component: PriceView
   },
   {
-    path: '/summary',
+    path: '/summary/:id',
     name: 'summary',
     component: SummaryView
   },

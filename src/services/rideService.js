@@ -22,4 +22,8 @@ exports.getCities = (name) => {
   return api.get(`/cities?name=${name}`);
 }
 
+exports.updatePrice = (priceDto) => {
+  return api.post('/prices', priceDto);
+}
+
 export default exports;

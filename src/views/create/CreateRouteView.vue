@@ -226,7 +226,7 @@
         this.end = start;
       },
 
-      next() {
+      async next() {
         let errorStep = false;
         this.errorStartTime = this.startTime === null ? 'Ce champ est requis' : null;
         this.errorEndTime = this.endTime === null ? 'Ce champ est requis' : null;
@@ -243,29 +243,41 @@
           const endMinutes = JSON.parse(JSON.stringify(this.endTime))['mm'] === '' ? '00' : JSON.parse(JSON.stringify(this.endTime))['mm'];
           const endSeconds = JSON.parse(JSON.stringify(this.endTime))['ss'] === '' ? '00' : JSON.parse(JSON.stringify(this.endTime))['ss'];
           const endDate = new Date(endTime);
-
+          let start = '';
+          for (let i = 0; i < JSON.parse(JSON.stringify(this.allStartCities)).data.length; i++) {
+            if (JSON.parse(JSON.stringify(this.allStartCities)).data[i]['name'] === this.start) {
+              start = JSON.parse(JSON.stringify(this.allStartCities)).data[i]['id']
+            }
+          }
+          let end = '';
+          for (let i = 0; i < JSON.parse(JSON.stringify(this.allEndCities)).data.length; i++) {
+            if (JSON.parse(JSON.stringify(this.allEndCities)).data[i]['name'] === this.end) {
+              end = JSON.parse(JSON.stringify(this.allEndCities)).data[i]['id']
+            }
+          }
           let allSteps = [];
           allSteps.push({
             date: startDate.toISOString().split('T')[0],
             time: startHours + ':' + startMinutes + ':' + startSeconds,
             position: 1,
-            cityId: JSON.parse(JSON.stringify(this.allStartCities.data))['id']
+            cityId: start
           });
           allSteps.push({
             date: endDate.toISOString().split('T')[0],
             time: endHours + ':' + endMinutes + ':' + endSeconds,
             position: 2,
-            cityId: JSON.parse(JSON.stringify(this.allEndCities.data))['id']
+            cityId: end
           });
-          rideService.createRide({
+          let id = '';
+          await rideService.createRide({
             maxPassenger: this.maxPassenger.charAt(0),
             steps: allSteps
           }).then((r) => {
-            console.log(r)
+            id = r.data.id;
           }).catch((e) => {
             console.log("Erreur :", e);
           });
-          router.push({path: 'price'});
+          router.push({name: 'price', params: {id: id}});
         }
       },
 
