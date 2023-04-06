@@ -1,112 +1,156 @@
 <template>
-  <div>
-    <h1 style="text-align: center; padding: 2em 0 0 0;">Créer votre trajet</h1>
-    <div id="route">
-      <div id="left">
-        <h2>Trajet</h2>
-        <p>Dîtes nous tout !</p>
-      </div>
-      <div id="card">
-        <v-row>
-          <v-col cols="1" md="1">
-            <v-icon icon="mdi-map-marker" />
-          </v-col>
-          <v-col cols="8" md="8">
-            <v-text-field v-model="start" :rules="startRules" label="Départ" placeholder="Départ" variant="underlined" required></v-text-field>
-          </v-col>
-          <v-col cols="1" md="1" style="text-align:center;">
-            <v-btn id="arrow" @click="changeDestination()">
-              <v-icon icon="mdi-arrow-up-down" />
-            </v-btn>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="1" md="1">
-            <v-icon icon="mdi-map-marker" />
-          </v-col>
-          <v-col cols="9" md="9">
-            <v-text-field v-model="end" :rules="endRules" label="Arrivée" placeholder="Arrivée" variant="underlined" required></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="1" md="1">
-            <v-icon icon="mdi-calendar-blank" />
-          </v-col>
-          <v-col cols="4" md="4">
-            <Datepicker v-model="date" :rules="dateRules" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
-          </v-col>
-          <v-col cols="1" md="1">
-            <v-icon icon="mdi-clock-outline" />
-          </v-col>
-          <v-col cols="4" md="4">
-            <VueTimePicker id="time" :rules="timeRules" format="HH:mm:ss" v-model="time" required></VueTimePicker>
-          </v-col>
-        </v-row>
-      </div>
-    </div>
-    <div id="route">
-      <div id="left">
-        <h2>Etape</h2>
-        <p>Les petites pauses c'est essentielles !</p>
-      </div>
-      <div id="right">
-        <div v-for="index in steps" :key="index">
-          <div v-if="step" id="step">
+  <v-form ref="form">
+    <div>
+      <h1 style="text-align: center; padding: 2em 0 0 0;">Créer votre trajet</h1>
+      <div id="route">
+        <div id="left">
+          <h2>Trajet</h2>
+          <p>Dîtes nous tout !</p>
+        </div>
+        <div id="card">
+          <v-row>
+            <v-col cols="1" md="1">
+              <v-icon icon="mdi-map-marker" />
+            </v-col>
+            <v-col cols="8" md="8">
+              <v-autocomplete
+                  v-model="start"
+                  :rules="startRules"
+                  :items="startCities"
+                  v-model:search="startSearch"
+                  label="Départ"
+                  variant="underlined"
+                  required
+              >
+              </v-autocomplete>
+            </v-col>
+            <v-col cols="1" md="1" style="text-align:center;">
+              <v-btn id="arrow" @click="changeDestination()">
+                <v-icon icon="mdi-arrow-up-down" />
+              </v-btn>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="1" md="1">
+              <v-icon icon="mdi-map-marker" />
+            </v-col>
+            <v-col cols="9" md="9">
+              <v-autocomplete
+                  v-model="end"
+                  :rules="endRules"
+                  :items="endCities"
+                  v-model:search="endSearch"
+                  label="Arrivée"
+                  variant="underlined"
+                  required
+              ></v-autocomplete>
+            </v-col>
+          </v-row>
+          <MqResponsive target="sm-xl">
             <v-row>
               <v-col cols="1" md="1">
-                <v-icon icon="mdi-map-marker" />
+                <v-icon icon="mdi-calendar-blank" />
               </v-col>
-              <v-col cols="8" md="8">
-                <v-text-field v-model="address[index]" label="Adresse" placeholder="Adresse" variant="underlined" required></v-text-field>
+              <v-col cols="4" md="4">
+                Départ<Datepicker v-model="startDate" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
               </v-col>
-              <v-icon id="close" icon="mdi-close" @click="close(index)" />
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-clock-outline" />
+              </v-col>
+              <v-col cols="4" md="4">
+                Départ<VueTimePicker format="HH:mm:ss" v-model="startTime" required :class="`${errorStartTime ? 'errorInput' : 'time'}`"></VueTimePicker>
+                <div v-if="errorStartTime" class="error">{{errorStartTime}}</div>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-calendar-blank" />
+              </v-col>
+              <v-col cols="4" md="4">
+                Arrivée<Datepicker v-model="endDate" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
+              </v-col>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-clock-outline" />
+              </v-col>
+              <v-col cols="4" md="4">
+                Arrivée<VueTimePicker format="HH:mm:ss" v-model="endTime" required :class="`${errorStartTime ? 'errorInput' : 'time'}`"></VueTimePicker>
+                <div v-if="errorEndTime" class="error">{{errorEndTime}}</div>
+              </v-col>
+            </v-row>
+          </MqResponsive>
+          <MqResponsive target="xs">
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-calendar-blank" />
+              </v-col>
+              <v-col cols="9" md="9">
+                Départ<Datepicker v-model="startDate" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
+              </v-col>
             </v-row>
             <v-row>
               <v-col cols="1" md="1">
                 <v-icon icon="mdi-clock-outline" />
               </v-col>
-              <v-col cols="4" md="4">
-                <VueTimePicker id="time" format="HH:mm:ss" v-model="stepTime[index]" required></VueTimePicker>
+              <v-col cols="9" md="9">
+                Départ<VueTimePicker format="HH:mm:ss" v-model="startTime" required :class="`${errorStartTime ? 'errorInput' : 'time'}`"></VueTimePicker>
+                <div v-if="errorStartTime" class="error">{{errorStartTime}}</div>
               </v-col>
             </v-row>
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-calendar-blank" />
+              </v-col>
+              <v-col cols="9" md="9">
+                Arrivée<Datepicker v-model="endDate" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="1" md="1">
+                <v-icon icon="mdi-clock-outline" />
+              </v-col>
+              <v-col cols="9" md="9">
+                Arrivée<VueTimePicker format="HH:mm:ss" v-model="endTime" required :class="`${errorStartTime ? 'errorInput' : 'time'}`"></VueTimePicker>
+                <div v-if="errorEndTime" class="error">{{errorStartTime}}</div>
+              </v-col>
+            </v-row>
+          </MqResponsive>
+        </div>
+      </div>
+      <div id="route">
+        <div id="left">
+          <h2>Modalités</h2>
+          <p>Détaillons plus précisément les conditions pour voyager avec toi.</p>
+        </div>
+        <div id="right">
+          <div id="person">
+            <v-select
+                v-model="maxPassenger"
+                :items="personSorting"
+                label="Nombre de personnes"
+                variant="underlined"
+                :rules="passengerRules"
+                required
+            ></v-select>
           </div>
-        </div>
-        <v-btn id="button" @click="add()">AJOUTER UNE ETAPE</v-btn>
-        <p v-if="!step">Tu pourras récupérer d'autres compagnons de voyage.</p>
-      </div>
-    </div>
-    <div id="route">
-      <div id="left">
-        <h2>Modalités</h2>
-        <p>Détaillons plus précisément les conditions pour voyager avec toi.</p>
-      </div>
-      <div id="right">
-        <div id="person">
-          <v-select
-              :items="personSorting"
-              label="Nombre de personnes"
-              variant="underlined"
-              required
-          ></v-select>
-        </div>
-        <p>Ajoutez des précisions sur votre véhicule afin de vous retrouver plus facilement.</p>
-        <div class="car">
-          <div class="car left">
-            <v-icon icon="mdi-car" />
-            <div class="model">
-              <v-text-field v-model="model" :rules="modelRules" label="Modèle du véhicule" placeholder="Modèle du véhicule" variant="underlined" required></v-text-field>
+          <p>Ajoutez des précisions sur votre véhicule afin de vous retrouver plus facilement.</p>
+          <div class="car">
+            <div class="car left">
+              <v-icon icon="mdi-car" />
+              <div class="model">
+                <v-text-field v-model="model" label="Modèle du véhicule" placeholder="Modèle du véhicule" variant="underlined" required></v-text-field>
+              </div>
+            </div>
+            <div class="right">
+              <v-text-field v-model="color" label="Couleur du véhicule" placeholder="Couleur du véhicule" variant="underlined" required></v-text-field>
             </div>
           </div>
-          <div class="right">
-            <v-text-field v-model="color" :rules="colorRules" label="Couleur du véhicule" placeholder="Couleur du véhicule" variant="underlined" required></v-text-field>
-          </div>
         </div>
       </div>
+      <div style="text-align: center;">
+        <v-btn id="button" @click="next()">SUIVANT</v-btn>
+      </div>
     </div>
-    <div style="text-align: center;">
-      <v-btn id="button" @click="router.push({ path: 'price' });">SUIVANT</v-btn>
-    </div>
-  </div>
+  </v-form>
 </template>
 <script>
   import Datepicker from 'vue3-datepicker';
@@ -116,6 +160,8 @@
   import "vue3-timepicker/dist/VueTimepicker.css";
   const date = ref(new Date());
   import router from "@/router";
+  import rideService from "@/services/rideService";
+  import { MqResponsive } from "vue3-mq";
 
   export default {
     name: "CreateRouteView",
@@ -124,37 +170,41 @@
         return router
       }
     },
-    components: {Datepicker, VueTimePicker},
+    components: {Datepicker, VueTimePicker, MqResponsive,},
     data() {
       return {
         start: null,
         end: null,
-        date: date,
+        startDate: date,
+        endDate: date,
         locale: fr,
-        time: null,
+        startTime: null,
+        endTime: null,
         color: null,
         model: null,
         step: false,
         numberStep: 0,
-        steps: [],
+        maxPassenger: null,
+        startCities: [],
+        endCities: [],
+        allEndCities: [],
+        allStartCities: [],
+        cities: [],
         address: [],
-        stepTime: [],
+        errorStartTime: null,
+        errorEndTime: null,
+        startSearch: null,
+        endSearch: null,
         startRules: [
           v => !!v || 'Ce champ est requis'
         ],
         endRules: [
           v => !!v || 'Ce champ est requis'
         ],
-        dateRules: [
-          v => !!v || "Ce champs est requis"
-        ],
-        timeRules: [
+        passengerRules: [
           v => !!v || "Ce champ est requis"
         ],
-        modelRules: [
-          v => !!v || "Ce champ est requis"
-        ],
-        colorRules: [
+        addressRules: [
           v => !!v || "Ce champ est requis"
         ],
         personSorting: [
@@ -176,16 +226,71 @@
         this.end = start;
       },
 
-      add() {
-        this.step = true;
-        this.numberStep = this.numberStep + 1;
-        this.steps.push(this.numberStep);
+      next() {
+        let errorStep = false;
+        this.errorStartTime = this.startTime === null ? 'Ce champ est requis' : null;
+        this.errorEndTime = this.endTime === null ? 'Ce champ est requis' : null;
+        this.$refs.form.validate();
+        if (this.startTime != null && this.endTime != null && !errorStep) {
+          let startTime = this.startDate.getTime();
+          const startHours = JSON.parse(JSON.stringify(this.startTime))['HH'] === '' ? '00' : JSON.parse(JSON.stringify(this.startTime))['HH'];
+          const startMinutes = JSON.parse(JSON.stringify(this.startTime))['mm'] === '' ? '00' : JSON.parse(JSON.stringify(this.startTime))['mm'];
+          const startSeconds = JSON.parse(JSON.stringify(this.startTime))['ss'] === '' ? '00' : JSON.parse(JSON.stringify(this.startTime))['ss'];
+          const startDate = new Date(startTime);
+
+          let endTime = this.endDate.getTime();
+          const endHours = JSON.parse(JSON.stringify(this.endTime))['HH'] === '' ? '00' : JSON.parse(JSON.stringify(this.endTime))['HH'];
+          const endMinutes = JSON.parse(JSON.stringify(this.endTime))['mm'] === '' ? '00' : JSON.parse(JSON.stringify(this.endTime))['mm'];
+          const endSeconds = JSON.parse(JSON.stringify(this.endTime))['ss'] === '' ? '00' : JSON.parse(JSON.stringify(this.endTime))['ss'];
+          const endDate = new Date(endTime);
+
+          let allSteps = [];
+          allSteps.push({
+            date: startDate.toISOString().split('T')[0],
+            time: startHours + ':' + startMinutes + ':' + startSeconds,
+            position: 1,
+            cityId: JSON.parse(JSON.stringify(this.allStartCities.data))['id']
+          });
+          allSteps.push({
+            date: endDate.toISOString().split('T')[0],
+            time: endHours + ':' + endMinutes + ':' + endSeconds,
+            position: 2,
+            cityId: JSON.parse(JSON.stringify(this.allEndCities.data))['id']
+          });
+          rideService.createRide({
+            maxPassenger: this.maxPassenger.charAt(0),
+            steps: allSteps
+          }).then((r) => {
+            console.log(r)
+          }).catch((e) => {
+            console.log("Erreur :", e);
+          });
+          router.push({path: 'price'});
+        }
       },
 
-      close(id) {
-        this.steps.splice(this.steps.indexOf(id), 1);
+      async startQuerySelections(v) {
+        this.allStartCities = await rideService.getCities(v);
+        for (const key in (JSON.parse(JSON.stringify(this.allStartCities.data)))) {
+          this.startCities[key] = JSON.parse(JSON.stringify(this.allStartCities.data))[key]['name']
+        }
+      },
+
+      async endQuerySelections(v) {
+        this.allEndCities = await rideService.getCities(v);
+        for (const key in (JSON.parse(JSON.stringify(this.allEndCities.data)))) {
+          this.endCities[key] = JSON.parse(JSON.stringify(this.allEndCities.data))[key]['name']
+        }
       }
-    }
+    },
+    watch: {
+      startSearch (val) {
+        val && val !== this.start && this.startQuerySelections(val)
+      },
+      endSearch (val) {
+        val && val !== this.start && this.endQuerySelections(val)
+      },
+    },
   }
 </script>
 <style scoped>
@@ -249,12 +354,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
 }
 
-:deep #time {
+:deep .time {
   border: none;
   border-bottom: 1px #b4b4b4 solid;
   height: auto;
   padding: 0;
   width: 100%;
+}
+
+:deep .time input {
+  border: none;
 }
 
 #arrow {
@@ -294,6 +403,29 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .model {
   width: 100%; padding: 0 1em;
+}
+
+.error {
+  color: #B00020;
+  font-size: 12px;
+  padding-top: 5px;
+}
+
+:deep .errorInput {
+  border: none;
+  border-bottom: 1px #B00020 solid;
+  height: auto;
+  padding: 0;
+  width: 100%;
+}
+
+:deep .errorInput input {
+  border: none;
+}
+
+:deep .errorInput ::placeholder {
+  color: #B00020;
+  opacity: 1;
 }
 
 @media (min-width: 750px) and (max-width: 1250px) {
