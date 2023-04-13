@@ -56,7 +56,7 @@
       <div class="create">
         <h2>Vous êtes conducteur ?</h2>
         <p>Trouvez votre compagnon de route pour papoter avec vous sur le trajet. Déposez votre annonce et vous n’aurez plus qu’à choisir votre covoitureur !</p><br />
-        <v-btn id="button" @click="router.push({ path: 'create-route' });">CRÉER VOTRE ANNONCE</v-btn>
+        <v-btn id="button" @click="router.push({ path: 'create-ride' });">CRÉER VOTRE ANNONCE</v-btn>
       </div>
     </v-card>
     <div v-if="!empty" class="results">

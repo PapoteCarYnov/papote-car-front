@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: 'search'}">
+  <router-link :to="{ name: 'create-ride'}">
     <div class="create-button">
       <v-icon icon="mdi-plus-circle-outline" aria-hidden="true" /> 
       <span class="button-text">Créer un trajet</span>

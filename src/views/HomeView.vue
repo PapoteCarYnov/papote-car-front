@@ -20,7 +20,15 @@
                     <v-icon icon="mdi-map-marker" />
                   </v-col>
                   <v-col cols="4" md="4">
-                    <v-text-field v-model="start" :rules="startRules" label="Départ" placeholder="Départ" variant="underlined" required></v-text-field>
+                    <v-autocomplete
+                        v-model="start"
+                        :items="startCities"
+                        v-model:search="startSearch"
+                        label="Départ"
+                        variant="underlined"
+                        required
+                    >
+                    </v-autocomplete>
                   </v-col>
                   <v-col cols="1" md="1">
                     <v-btn id="arrow" @click="changeDestination()">
@@ -31,7 +39,14 @@
                     <v-icon icon="mdi-map-marker" />
                   </v-col>
                   <v-col cols="4" md="4">
-                    <v-text-field v-model="end" :rules="endRules" label="Arrivée" placeholder="Arrivée" variant="underlined" required></v-text-field>
+                    <v-autocomplete
+                        v-model="end"
+                        :items="endCities"
+                        v-model:search="endSearch"
+                        label="Arrivée"
+                        variant="underlined"
+                        required
+                    ></v-autocomplete>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -39,7 +54,7 @@
                     <v-icon icon="mdi-calendar-blank" />
                   </v-col>
                   <v-col cols="4" md="4">
-                    <Datepicker v-model="date" :rules="dateRules" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
+                    <Datepicker v-model="date" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
                   </v-col>
                   <v-col id="col" cols="1" md="1">
                   </v-col>
@@ -47,7 +62,7 @@
                     <v-icon icon="mdi-account-multiple" />
                   </v-col>
                   <v-col cols="4" md="4">
-                    <v-text-field v-model="nbPeople" :rules="nbPeopleRules" type="number" min="0" label="Nombre de personnes" placeholder="Nombre de personnes" variant="underlined" required></v-text-field>
+                    <v-text-field v-model="nbPeople" type="number" min="0" label="Nombre de personnes" placeholder="Nombre de personnes" variant="underlined" required></v-text-field>
                   </v-col>
                 </v-row>
               </MqResponsive>
@@ -57,8 +72,15 @@
                     <v-icon icon="mdi-map-marker" />
                   </v-col>
                   <v-col cols="9" md="9">
-                    <v-text-field v-model="start" :rules="startRules" label="Départ" placeholder="Départ" variant="underlined" required></v-text-field>
-                  </v-col>
+                    <v-autocomplete
+                        v-model="start"
+                        :items="startCities"
+                        v-model:search="startSearch"
+                        label="Départ"
+                        variant="underlined"
+                        required
+                    >
+                    </v-autocomplete>                  </v-col>
                   <v-col cols="1" md="1" style="text-align:center;">
                     <v-btn id="arrow" @click="changeDestination()">
                       <v-icon icon="mdi-arrow-up-down" />
@@ -70,15 +92,21 @@
                     <v-icon icon="mdi-map-marker" />
                   </v-col>
                   <v-col cols="10" md="10">
-                    <v-text-field v-model="end" :rules="endRules" label="Arrivée" placeholder="Arrivée" variant="underlined" required></v-text-field>
-                  </v-col>
+                    <v-autocomplete
+                        v-model="end"
+                        :items="endCities"
+                        v-model:search="endSearch"
+                        label="Arrivée"
+                        variant="underlined"
+                        required
+                    ></v-autocomplete>                  </v-col>
                 </v-row>
                 <v-row>
                   <v-col cols="1" md="1">
                     <v-icon icon="mdi-calendar-blank" />
                   </v-col>
                   <v-col cols="10" md="10">
-                    <Datepicker v-model="date" :rules="dateRules" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
+                    <Datepicker v-model="date" :locale="locale" inputFormat="dd-MM-yyyy" required></Datepicker>
                   </v-col>
                 </v-row>
                 <v-row>
@@ -86,7 +114,7 @@
                     <v-icon icon="mdi-account-multiple" />
                   </v-col>
                   <v-col cols="10" md="10">
-                    <v-text-field v-model="nbPeople" :rules="nbPeopleRules" type="number" min="0" label="Nombre de personnes" placeholder="Nombre de personnes" variant="underlined" required></v-text-field>
+                    <v-text-field v-model="nbPeople" type="number" min="0" label="Nombre de personnes" placeholder="Nombre de personnes" variant="underlined" required></v-text-field>
                   </v-col>
                 </v-row>
               </MqResponsive>
@@ -235,6 +263,7 @@ import { ref } from 'vue'
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
 import router from "@/router";
+import rideService from "@/services/rideService";
 
 export default {
   name: 'HomeView',
@@ -247,31 +276,51 @@ export default {
       date: date,
       locale: fr,
       nbPeople: null,
-      startRules: [
-        v => !!v || 'Ce champ est requis'
-      ],
-      endRules: [
-        v => !!v || 'Ce champ est requis'
-      ],
-      dateRules: [
-        v => !!v || "Ce champs est requis"
-      ],
-      nbPeopleRules: [
-        v => !!v || "Ce champ est requis"
-      ],
+      startCities: [],
+      endCities: [],
+      startSearch: null,
+      endSearch: null
     }
   },
   methods: {
     async submitForm() {
-      this.$refs.form.validate();
-      router.push("/search");
+      await router.push({
+        name: "search",
+        force: true,
+        state: {
+          homeStart: this.start,
+          homeEnd: this.end,
+          homeDate: this.date,
+          homeNbPeople: this.nbPeople
+        }
+      });
     },
     changeDestination() {
       const start = this.start;
       this.start = this.end;
       this.end = start;
+    },
+    async startQuerySelections(v) {
+      this.allStartCities = await rideService.getCities(v);
+      for (const key in (JSON.parse(JSON.stringify(this.allStartCities.data)))) {
+        this.startCities[key] = JSON.parse(JSON.stringify(this.allStartCities.data))[key]['name']
+      }
+    },
+    async endQuerySelections(v) {
+      this.allEndCities = await rideService.getCities(v);
+      for (const key in (JSON.parse(JSON.stringify(this.allEndCities.data)))) {
+        this.endCities[key] = JSON.parse(JSON.stringify(this.allEndCities.data))[key]['name']
+      }
     }
-  }
+  },
+  watch: {
+    startSearch (val) {
+      val && val !== this.start && this.startQuerySelections(val)
+    },
+    endSearch (val) {
+      val && val !== this.start && this.endQuerySelections(val)
+    }
+  },
 }
 </script>
 <style scoped>

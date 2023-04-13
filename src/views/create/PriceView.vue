@@ -26,7 +26,7 @@
           </div>
         </v-card>
         <div class="button">
-          <v-btn id="previous" @click="router.push({ path: 'create-route' });">Précédent</v-btn>
+          <v-btn id="previous" @click="router.push({ name: 'create-ride' });">Précédent</v-btn>
           <v-btn id="next" @click="submit()">Suivant</v-btn>
         </div>
       </div>
