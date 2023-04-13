@@ -8,17 +8,19 @@
       <v-row class="center-row">
         <div class="flex-div">
           <ul class="no-bullet">
-            <li v-for="step in stepsToShow" :key="step.id" class="time-step">
-              {{ step.time }}
+            <li class="time-step">
+              {{ startTime }}
+            </li>
+            <li class="time-step">
+              {{ endTime }}
             </li>
           </ul>
           <ul class="ride-steps no-bullet">
-            <li 
-              v-for="step in stepsToShow" 
-              :key="step.id"
-              :class="{ greyBullet: !step.check }"
-            >
-              {{ step.city }}
+            <li>
+              {{ startCity }}
+            </li>
+            <li>
+              {{ endCity }}
             </li>
           </ul>
         </div>
@@ -92,7 +94,7 @@
           </v-col>
           <v-spacer/>
           <v-col id="car-info">
-            La voiture
+            {{ driverName }}
           </v-col>
         </v-row>
       </MqResponsive>
@@ -104,7 +106,7 @@
           </v-col>
           <v-spacer/>
           <v-col id="car-info">
-            La voiture
+            {{ driverName }}
           </v-col>
         </v-row>
       </MqResponsive>
@@ -120,6 +122,8 @@
 <script>
 import { MqResponsive } from "vue3-mq";
 import router from "@/router";
+import {useRoute} from "vue-router";
+import rideService from '../services/rideService.js';
 
 export default {
   name: 'BookingView',
@@ -128,24 +132,11 @@ export default {
   },
   data() {
     return {
-      stepsToShow: [
-        {
-          id: 1,
-          time: '6h00',
-          city: 'Nantes',
-          check: true,
-        }, {
-          id: 2,
-          time: '7h10',
-          city: 'Rennes',
-          check: true,
-        }, {
-          id: 3,
-          time: '',
-          city: 'St Malo',
-          check: false,
-        }
-      ],
+      startTime: null,
+      endTime: null,
+      startCity: null,
+      endCity: null,
+      driverName: null,
       personSorting: [
         '1 personne',
         '2 personnes',
@@ -157,6 +148,20 @@ export default {
         '8 personnes',
       ]
     }
+  },
+  mounted() {
+    const route = useRoute();
+    this.id = route.params.id;
+    rideService.getRide(this.id).then((r) => {
+      console.log(r.data);
+      this.startTime = r.data.steps[0].time;
+      this.endTime = r.data.steps[1].time;
+      this.startCity = r.data.steps[0].city.name;
+      this.endCity = r.data.steps[1].city.name;
+      this.driverName = r.data.driver.firstname;
+    }).catch((e) => {
+      console.log("Erreur : ", e);
+    });
   },
   computed: {
     router() {
