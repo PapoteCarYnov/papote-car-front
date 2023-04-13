@@ -94,7 +94,7 @@ npm run serve -- --port 8081
 
 ## Plan du site
 
-![Sitemap](sitemap.png)
+![Sitemap](Sitemap.png)
 
 ## Déploiement
 
