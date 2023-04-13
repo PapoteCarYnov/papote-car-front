@@ -295,6 +295,7 @@ export default {
         }
       });
     },
+
     changeDestination() {
       const start = this.start;
       this.start = this.end;

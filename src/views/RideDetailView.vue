@@ -127,7 +127,7 @@
         <v-row>
           <v-col>Prix total pour 1 passager</v-col>
           <v-spacer/>
-          <v-col class="price">9€</v-col>
+          <v-col class="price">{{ price }}€</v-col>
         </v-row>
       </div>
       <v-divider :thickness="5" class="divider"></v-divider>
@@ -152,7 +152,6 @@ import { MqResponsive } from "vue3-mq";
 import router from "@/router";
 import {useRoute} from "vue-router";
 import rideService from '../services/rideService.js';
-import userService from '../services/userService.js';
 
 export default {
   name: 'RideDetailView',
@@ -166,6 +165,7 @@ export default {
       endTime: null,
       startCity: null,
       endCity: null,
+      price: null,
     }
   },
   computed: {
@@ -182,11 +182,7 @@ export default {
       this.endTime = r.data.steps[1].time;
       this.startCity = r.data.steps[0].city.name;
       this.endCity = r.data.steps[1].city.name;
-    }).catch((e) => {
-      console.log("Erreur : ", e);
-    });
-    userService.getCurrentUser().then((r) => {
-      console.log(r);
+      this.price = r.data.steps[0].prices[0].price;
     }).catch((e) => {
       console.log("Erreur : ", e);
     });
