@@ -10,6 +10,7 @@ import CreateRideView from "@/views/create/CreateRideView.vue";
 import PriceView from "@/views/create/PriceView.vue";
 import SummaryView from "@/views/create/SummaryView.vue";
 import ChatView from "@/views/ChatView.vue";
+import CguView from "@/views/CguView.vue";
 import NotFound from "@/views/NotFoundView.vue";
 
 const routes = [
@@ -67,6 +68,11 @@ const routes = [
     path: '/chat',
     name: 'chat',
     component: ChatView
+  },
+  {
+    path: '/cgu',
+    name: 'cgu',
+    component: CguView
   },
   { path: '/404', component: NotFound },
   { path: '/:catchAll(.*)', redirect: '/404' }
