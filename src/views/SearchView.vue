@@ -20,7 +20,15 @@
                   <v-icon icon="mdi-map-marker" />
                 </v-col>
                 <v-col cols="4" md="4">
-                  <v-text-field v-model="start" :rules="startRules" label="Départ" placeholder="Départ" variant="underlined" required></v-text-field>
+                  <v-autocomplete
+                      v-model="start"
+                      :rules="startRules"
+                      :items="startCities"
+                      v-model:search="startSearch"
+                      label="Départ"
+                      variant="underlined"
+                      required
+                  ></v-autocomplete>
                 </v-col>
                 <v-col cols="1" md="1">
                   <v-btn id="arrow" @click="changeDestination()">
@@ -31,7 +39,15 @@
                   <v-icon icon="mdi-map-marker" />
                 </v-col>
                 <v-col cols="4" md="4">
-                  <v-text-field v-model="end" :rules="endRules" label="Arrivée" placeholder="Arrivée" variant="underlined" required></v-text-field>
+                  <v-autocomplete
+                      v-model="end"
+                      :rules="endRules"
+                      :items="endCities"
+                      v-model:search="endSearch"
+                      label="Arrivée"
+                      variant="underlined"
+                      required
+                  ></v-autocomplete>
                 </v-col>
               </v-row>
               <v-row>
@@ -57,8 +73,15 @@
                   <v-icon icon="mdi-map-marker" />
                 </v-col>
                 <v-col cols="7" md="7">
-                  <v-text-field v-model="start" :rules="startRules" label="Départ" placeholder="Départ" variant="underlined" required></v-text-field>
-                </v-col>
+                  <v-autocomplete
+                      v-model="start"
+                      :rules="startRules"
+                      :items="startCities"
+                      v-model:search="startSearch"
+                      label="Départ"
+                      variant="underlined"
+                      required
+                  ></v-autocomplete>                </v-col>
                 <v-col cols="1" md="1" style="text-align:center;">
                   <v-btn id="arrow" @click="changeDestination()">
                     <v-icon icon="mdi-arrow-up-down" />
@@ -70,8 +93,15 @@
                   <v-icon icon="mdi-map-marker" />
                 </v-col>
                 <v-col cols="8" md="8">
-                  <v-text-field v-model="end" :rules="endRules" label="Arrivée" placeholder="Arrivée" variant="underlined" required></v-text-field>
-                </v-col>
+                  <v-autocomplete
+                      v-model="end"
+                      :rules="endRules"
+                      :items="endCities"
+                      v-model:search="endSearch"
+                      label="Arrivée"
+                      variant="underlined"
+                      required
+                  ></v-autocomplete>                    </v-col>
               </v-row>
               <v-row>
                 <v-col cols="1" md="1">
@@ -171,10 +201,22 @@ import { ref } from 'vue'
 const date = ref(new Date())
 import { fr } from 'date-fns/locale';
 import router from "@/router";
+import rideService from "@/services/rideService";
 
 export default {
   name: 'SearchView',
   components: {MqResponsive, Datepicker},
+  created() {
+    this.start = window.history.state.homeStart
+    this.end = window.history.state.homeEnd
+    this.date = window.history.state.homeDate
+    this.nbPeople = window.history.state.homeNbPeople
+  },
+  mounted() {
+    if (this.start != null && this.end != null && this.nbPeople != null) {
+      this.getRide();
+    }
+  },
   data() {
     return {
       open: false,
@@ -184,6 +226,12 @@ export default {
       locale: fr,
       date: date,
       nbPeople: null,
+      startCities: [],
+      endCities: [],
+      allEndCities: [],
+      allStartCities: [],
+      startSearch: null,
+      endSearch: null,
       startRules: [
         v => !!v || 'Ce champ est requis'
       ],
@@ -207,15 +255,65 @@ export default {
     }
   },
   methods: {
+    async getRide() {
+      await this.startQuerySelections(this.start);
+      let start = '';
+      for (let i = 0; i < JSON.parse(JSON.stringify(this.allStartCities)).data.length; i++) {
+        if (JSON.parse(JSON.stringify(this.allStartCities)).data[i]['name'] === this.start) {
+          start = JSON.parse(JSON.stringify(this.allStartCities)).data[i]['id']
+        }
+      }
+      await this.endQuerySelections(this.end);
+      let end = '';
+      for (let i = 0; i < JSON.parse(JSON.stringify(this.allEndCities)).data.length; i++) {
+        if (JSON.parse(JSON.stringify(this.allEndCities)).data[i]['name'] === this.end) {
+          end = JSON.parse(JSON.stringify(this.allEndCities)).data[i]['id']
+        }
+      }
+      let date = this.date.getTime();
+      date = new Date(date);
+      date = date.toISOString().split('T')[0]
+      await rideService.getRides({
+        startCityId: start,
+        endCityId: end,
+        date: date,
+        status: "BROUILLON"
+      }).then((r) => {
+        console.log(r)
+      }).catch((e) => {
+        console.log("Erreur :", e);
+      });
+    },
     async submitForm() {
-      this.$refs.form.validate();
+      await this.$refs.form.validate();
+      await this.getRide();
       this.showResult = true;
     },
     changeDestination() {
       const start = this.start;
       this.start = this.end;
       this.end = start;
+    },
+    async startQuerySelections(v) {
+      this.allStartCities = await rideService.getCities(v);
+      for (const key in (JSON.parse(JSON.stringify(this.allStartCities.data)))) {
+        this.startCities[key] = JSON.parse(JSON.stringify(this.allStartCities.data))[key]['name']
+      }
+    },
+    async endQuerySelections(v) {
+      this.allEndCities = await rideService.getCities(v);
+      for (const key in (JSON.parse(JSON.stringify(this.allEndCities.data)))) {
+        this.endCities[key] = JSON.parse(JSON.stringify(this.allEndCities.data))[key]['name']
+      }
     }
+  },
+  watch: {
+    startSearch(val) {
+      val && val !== this.start && this.startQuerySelections(val)
+    },
+    endSearch(val) {
+      val && val !== this.start && this.endQuerySelections(val)
+    },
   }
 }
 </script>

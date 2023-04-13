@@ -6,6 +6,10 @@ exports.createRide = (rideDto) => {
   return api.post('/rides', rideDto, config);
 };
 
+exports.getRides = (rideDto) => {
+  return api.get('/rides', rideDto);
+};
+
 exports.getRide = (id) => {
   return api.get(`/rides/${id}`);
 };

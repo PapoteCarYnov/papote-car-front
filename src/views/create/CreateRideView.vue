@@ -164,7 +164,7 @@
   import { MqResponsive } from "vue3-mq";
 
   export default {
-    name: "CreateRouteView",
+    name: "CreateRideView",
     computed: {
       router() {
         return router

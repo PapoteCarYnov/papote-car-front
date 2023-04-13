@@ -6,7 +6,7 @@ import SearchView from "@/views/SearchView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
 import RideDetailView from "@/views/RideDetailView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import CreateRouteView from "@/views/create/CreateRouteView.vue";
+import CreateRideView from "@/views/create/CreateRideView.vue";
 import PriceView from "@/views/create/PriceView.vue";
 import SummaryView from "@/views/create/SummaryView.vue";
 import ChatView from "@/views/ChatView.vue";
@@ -49,9 +49,9 @@ const routes = [
     component: ProfileView
   },
   {
-    path: '/create-route',
-    name: 'create-route',
-    component: CreateRouteView
+    path: '/create-ride',
+    name: 'create-ride',
+    component: CreateRideView
   },
   {
     path: '/price/:id',
