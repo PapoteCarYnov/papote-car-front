@@ -197,14 +197,15 @@ export default {
     }
   },
 
-  mounted() {
+  async mounted() {
+    await localStorage.getItem('user-token')
     userService.getCurrentUser().then((r) => {
       this.firstname = r.data.firstname;
       this.lastname = r.data.name;
       this.mail = r.data.email;
       this.birthdate = r.data.birthDate;
     }).catch((e) => {
-      console.log("Erreur : ",e);
+      console.log("Erreur : ", e);
     });
   }
 }
