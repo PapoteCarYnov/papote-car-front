@@ -36,7 +36,7 @@
         </div>
         <div class="button">
           <v-btn id="previous" @click="router.push({ name: 'price', params: {id: this.id} });">Précédent</v-btn>
-          <v-btn id="next" @click="router.push({ path: 'roadmap' });">Publier</v-btn>
+          <v-btn id="next" @click="router.push({ path: '/roadmap' });">Publier</v-btn>
         </div>
       </div>
     </div>
