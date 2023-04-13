@@ -163,6 +163,7 @@ export default {
       this.endCity = r.data.steps[1].city.name;
       this.driverName = r.data.driver.firstname;
       this.price = r.data.steps[0].prices[0].price;
+      moment.locale('fr');
       this.date = moment(r.data.steps[0]['date'], 'Y/M/D').format('dddd D MMMM Y');
       this.date = this.date.charAt(0).toUpperCase() + this.date.slice(1);
     }).catch((e) => {
