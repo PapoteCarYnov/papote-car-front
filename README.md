@@ -4,11 +4,11 @@
 
 Ce projet a été réalisé dans le cadre de notre Master sur le cours : Séparation Backend / Front-End.
 
-PapoteCar est une nouvelle entreprise de covoiturage engagée dans la sauvegarde l’environnementet dans le Green-It. Elle permet à des particuliers de proposer des places dans leur voiture lors de leurs trajets. Vous devez développer le portail Web qui permettra aux usagers d’utiliser les services de cette entreprise.
+PapoteCar est une nouvelle entreprise de covoiturage engagée dans la sauvegarde de l’environnement dans le Green-IT. Elle permet à des particuliers de proposer des places dans leur voiture lors de leurs trajets. Vous devez développer le portail Web qui permettra aux usagers d’utiliser les services de cette entreprise.
 
 ### Les objectifs à remplir :
 
-Les fonctionalités :
+Les fonctionnalités :
 
 - [x] Ajouter un trajet
 - [ ] Modifier un trajet
@@ -19,17 +19,17 @@ Les fonctionalités :
 - [x] Proposer un tableau de bord permettant de voir les trajets réservés par un passager
 - [x] Authentification
 - [x] Se renseigner sur les nouvelles réglementations RGPD en vigueur pour que vous et votre client soient en règle vis-à-vis des dispositifs légaux
-- [~] Système de messagerie permettra à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
+- [~] Système de messagerie permettant à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
 - [ ] Un trajet peut avoir plusieurs étapes sur lesquelles un nouveau passager peut descendre ou monter
 - [~] Les passagers doivent être validés par le conducteur
 
-Fonctionalités supplémentaires :
+Fonctionnalités supplémentaires :
 
 - [x] Modifier son profil
 - [x] Supprimer son profil
 - [x] Rechercher un trajet
 
-Attendu Minimum
+Attendu minimum
 
 - [x] Maquetter une application responsive : [lien de la maquette](https://www.figma.com/proto/MMXLA9iA32F5cpWPNzyStq/PapoteCar?node-id=76%3A1300&scaling=scale-down&starting-point-node-id=76%3A1301)
 - [x] Concevoir une charte graphique cohérente
@@ -41,7 +41,7 @@ Attendu Minimum
 
 Attendu front :
 
-- [x] qualité de l'expérience utilisateur (y compris mobile)
+- [x] Qualité de l'expérience utilisateur (y compris mobile)
 
 Bonus :
 
@@ -51,7 +51,7 @@ Bonus :
 
 Les membres constituant le groupe sont les suivants :
 
-- Axelle Guinaudeau ([Theia01](https://github.com/Theia01))
+- Axelle GUINAUDEAU ([Theia01](https://github.com/Theia01))
 - Medi DEMIRDELEN ([medi-demirdelen](https://github.com/medi-demirdelen))
 - Camille NAULET ([camillenaulet03](https://github.com/camillenaulet03))
 - Lily MAJANI ([lilymajani](https://github.com/lilymajani))
