@@ -86,7 +86,7 @@ const routes = [
 ];
 
 function beforeEnter(to, from, next) {
-  if (localStorage.getItem('isLoggedIn')) next();
+  if (localStorage.getItem('user-token')) next();
   else next({ name: 'login', force: true, state: { login: true } })
 }
 
