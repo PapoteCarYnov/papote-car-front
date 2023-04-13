@@ -272,12 +272,20 @@ export default {
       }
       let date = this.date.getTime();
       date = new Date(date);
-      date = date.toISOString().split('T')[0]
+      date = date.toISOString().split('T')[0];
+      const token = localStorage.getItem('user-token');
       await rideService.getRides({
         startCityId: start,
         endCityId: end,
         date: date,
-        status: "BROUILLON"
+        status: "BROUILLON",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Access-Control-Allow-Origin": process.env.VUE_APP_ENV,
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+          "Access-Control-Allow-Headers": "X-Requested-With, x-requested-with, content-type, Content-Type, Authorization"
+        }
       }).then((r) => {
         console.log(r)
       }).catch((e) => {

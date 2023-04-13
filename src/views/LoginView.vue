@@ -109,7 +109,7 @@ export default {
             password: this.password
           }).then((r) => {
             this.registerToken(r.data);
-            router.push("/");
+            router.push("/roadmap");
             this.emitter.emit("isLoggedIn", true);
           }).catch((e) => {
             console.log("Erreur :",e);
@@ -124,7 +124,7 @@ export default {
             phone: this.phone,
           };
           authService.register(userCreateDto).then(() => {
-            router.push("/");
+            router.push({ name: 'login', force: true, state: { login: true } });
           }).catch((e) => {
             console.log("Erreur :",e);
           });
