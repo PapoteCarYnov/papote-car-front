@@ -4,7 +4,7 @@
 
 Ce projet a été réalisé dans le cadre de notre Master sur le cours : Séparation Backend / Front-End.
 
-PapoteCar est une nouvelle entreprise de covoiturage engagée dans la sauvegarde l’environnementet dans le Green-It. Elle permet à des particuliers de proposer des places dans leur voiture lors deleurs trajets. Vous devez développer le portail Web qui permettra aux usagers d’utiliser les servicesde cette entreprise.
+PapoteCar est une nouvelle entreprise de covoiturage engagée dans la sauvegarde l’environnementet dans le Green-It. Elle permet à des particuliers de proposer des places dans leur voiture lors de leurs trajets. Vous devez développer le portail Web qui permettra aux usagers d’utiliser les services de cette entreprise.
 
 ### Les objectifs à remplir :
 
@@ -18,9 +18,9 @@ Les fonctionalités :
 - [x] Proposer un tableau de bord permettant de voir l’état des trajets en cours
 - [x] Proposer un tableau de bord permettant de voir les trajets réservés par un passager
 - [x] Authentification
-- [x] se renseigner sur les nouvelles réglementations RGPD en vigueur pour que vous et votre client soient enrègle vis-à-vis des dispositifs légaux
+- [x] Se renseigner sur les nouvelles réglementations RGPD en vigueur pour que vous et votre client soient en règle vis-à-vis des dispositifs légaux
 - [~] Système de messagerie permettra à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
-- [ ] Un trajet peut avoir plusieurs étapes sur lesquelles un nouveau passager peut descendre o umonte
+- [ ] Un trajet peut avoir plusieurs étapes sur lesquelles un nouveau passager peut descendre ou monter
 - [~] Les passagers doivent être validés par le conducteur
 
 Fonctionalités supplémentaires :
