@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Vendredi 4 février</h1>
+    <h1>{{ date }}</h1>
   </div>
   <div id="booking-content">
 
@@ -124,6 +124,7 @@ import { MqResponsive } from "vue3-mq";
 import router from "@/router";
 import {useRoute} from "vue-router";
 import rideService from '../services/rideService.js';
+import moment from "moment/moment";
 
 export default {
   name: 'BookingView',
@@ -138,6 +139,7 @@ export default {
       endCity: null,
       driverName: null,
       price: null,
+      date: null,
       personSorting: [
         '1 personne',
         '2 personnes',
@@ -161,6 +163,9 @@ export default {
       this.endCity = r.data.steps[1].city.name;
       this.driverName = r.data.driver.firstname;
       this.price = r.data.steps[0].prices[0].price;
+      moment.locale('fr');
+      this.date = moment(r.data.steps[0]['date'], 'Y/M/D').format('dddd D MMMM Y');
+      this.date = this.date.charAt(0).toUpperCase() + this.date.slice(1);
     }).catch((e) => {
       console.log("Erreur : ", e);
     });
