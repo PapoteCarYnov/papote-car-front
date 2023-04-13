@@ -10,6 +10,7 @@
         <RoadmapButton v-if="isLoggedIn"></RoadmapButton>
         <SearchButton v-if="isLoggedIn"></SearchButton>
         <ProfileIcon v-if="isLoggedIn"></ProfileIcon>
+        <ChatIcon v-if="isLoggedIn"></ChatIcon>
         <LogoutButton v-if="isLoggedIn"></LogoutButton>
         <ConnectButton v-if="!isLoggedIn"></ConnectButton>
         <SigninButton v-if="!isLoggedIn"></SigninButton>
@@ -22,6 +23,7 @@
         </template>
         <v-spacer />
         <ProfileIcon v-if="isLoggedIn"></ProfileIcon>
+        <ChatIcon v-if="isLoggedIn"></ChatIcon>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       </v-app-bar>
       <v-navigation-drawer
@@ -83,6 +85,7 @@ import SearchButton from './header/SearchButton.vue';
 import RoadmapButton from './header/RoadmapButton.vue';
 import CreateButton from './header/CreateButton.vue';
 import ProfileIcon from './header/ProfileIcon.vue';
+import ChatIcon from './header/ChatIcon.vue';
 
 export default {
   name: "AppHeader",
@@ -97,6 +100,7 @@ export default {
     RoadmapButton,
     CreateButton,
     ProfileIcon,
+    ChatIcon,
   },
 
   data: () => ({

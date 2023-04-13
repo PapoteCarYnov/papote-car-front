@@ -19,7 +19,7 @@
               </ul>
             </div>
             <div class="lastItem">
-              <p>{{ price }}</p>
+              <p>{{ price }}€</p>
             </div>
           </div>
         </v-card>
@@ -58,10 +58,11 @@ export default {
     const ride = await rideService.getRide(this.id);
     this.step1 = ride.data.steps[0]['city']['name'];
     this.step2 = ride.data.steps[1]['city']['name'];
-    moment.locale('fr')
+    moment.locale('fr');
     this.date = moment(ride.data.steps[0]['date'], 'Y/M/D').format('dddd D MMMM Y');
     this.startTime = ride.data.steps[0]['time'];
     this.endTime = ride.data.steps[1]['time'];
+    this.price = ride.data.steps[0]['prices'][0]['price'];
   },
   data() {
     return {

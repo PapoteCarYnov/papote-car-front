@@ -53,7 +53,7 @@
           </v-col>
           
           <v-col class="col-right price">
-            9€
+            {{ price }}€
           </v-col>
         </v-row>  
       </MqResponsive>
@@ -64,7 +64,7 @@
             Prix total pour:
           </v-col>
           <v-col class="price">
-            9€
+            {{ price }}€
           </v-col>
         </v-row>
         <v-row>
@@ -137,6 +137,7 @@ export default {
       startCity: null,
       endCity: null,
       driverName: null,
+      price: null,
       personSorting: [
         '1 personne',
         '2 personnes',
@@ -159,6 +160,7 @@ export default {
       this.startCity = r.data.steps[0].city.name;
       this.endCity = r.data.steps[1].city.name;
       this.driverName = r.data.driver.firstname;
+      this.price = r.data.steps[0].prices[0].price;
     }).catch((e) => {
       console.log("Erreur : ", e);
     });
