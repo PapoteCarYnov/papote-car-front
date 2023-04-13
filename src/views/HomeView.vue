@@ -232,7 +232,7 @@
         <div id="post">
           <h3 class="title">Vous cherchez un compagnon de voyage avec qui papoter ?</h3>
           <p>Postez votre trajet ! Vous trouverez de nombreux covoitureurs voulant rejoindre votre trajet. Choisissez les étapes et les horaires de votre itinéraire et c’est tout ! Facile, non ? Qui sait ? Vous trouverez peut être votre perle rare ;)</p>
-          <v-btn style="margin-top: 2em; background-color: #F58926; color: white;">PARTAGEZ VOTRE TRAJET</v-btn>
+          <v-btn style="margin-top: 2em; background-color: #F58926; color: white;" @click="toCreateRide()">PARTAGEZ VOTRE TRAJET</v-btn>
         </div>
       </div>
     </section>
@@ -240,7 +240,7 @@
       <div id="sectionPeople">
         <h3 class="title">Qu’attendez vous pour partir à l’aventure ?</h3>
         <p>Rejoignez notre communauté pour papoter avec nous et découvrir des tas de personnes chaleureuse et passionnées !</p>
-        <v-btn style="margin-top: 2em; background-color: #F58926; color: white;">INSCRIVEZ-VOUS</v-btn>
+        <v-btn style="margin-top: 2em; background-color: #F58926; color: white;" @click="toSignIn()">INSCRIVEZ-VOUS</v-btn>
       </div>
       <div id="imgPeople">
         <v-img
@@ -279,7 +279,8 @@ export default {
       startCities: [],
       endCities: [],
       startSearch: null,
-      endSearch: null
+      endSearch: null,
+      isLoggedIn: false,
     }
   },
   methods: {
@@ -295,7 +296,16 @@ export default {
         }
       });
     },
-
+    toSignIn() {
+      if(!this.isLoggedIn) {
+        router.push({ name: 'login', force: true, state: { login: false } });
+      }
+    },
+    toCreateRide() {
+      if(this.isLoggedIn) {
+        router.push({ name: 'create-ride'});
+      }
+    },
     changeDestination() {
       const start = this.start;
       this.start = this.end;
@@ -321,6 +331,12 @@ export default {
     endSearch (val) {
       val && val !== this.start && this.endQuerySelections(val)
     }
+  },
+  mounted() {
+    this.emitter.on("isLoggedIn", r => {
+      this.isLoggedIn = r;
+    });
+    this.isLoggedIn = localStorage.getItem('user-token') != null;
   },
 }
 </script>
