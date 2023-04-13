@@ -19,9 +19,9 @@ Les fonctionnalités :
 - [x] Proposer un tableau de bord permettant de voir les trajets réservés par un passager
 - [x] Authentification
 - [x] Se renseigner sur les nouvelles réglementations RGPD en vigueur pour que vous et votre client soient en règle vis-à-vis des dispositifs légaux
-- [~] Système de messagerie permettant à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
+- [-] Système de messagerie permettant à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
 - [ ] Un trajet peut avoir plusieurs étapes sur lesquelles un nouveau passager peut descendre ou monter
-- [~] Les passagers doivent être validés par le conducteur
+- [-] Les passagers doivent être validés par le conducteur
 
 Fonctionnalités supplémentaires :
 
@@ -60,7 +60,7 @@ Les membres constituant le groupe sont les suivants :
 
 ### Mettre en place le projet
 
-Il vous faut ensuite **cloner le projet :**
+Il vous faut **cloner le projet :**
 
 ```sh
 git clone https://github.com/PapoteCarYnov/papote-car-front.git
@@ -91,6 +91,10 @@ Pour terminer, afin de lancer l'application, lancez la commande :
 ```sh
 npm run serve -- --port 8081
 ```
+
+## Plan du site
+
+![Sitemap](sitemap.png)
 
 ## Déploiement
 
