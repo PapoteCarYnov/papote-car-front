@@ -57,6 +57,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <!--
         <v-row>
           <v-col cols="12" md="12">
             <v-text-field
@@ -79,6 +80,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        -->
         <v-row>
           <v-btn class="form-button" @click="submitForm">Enregistrer</v-btn>
         </v-row>
@@ -140,8 +142,8 @@ export default {
       lastname: '',
       mail: '',
       birthdate: '',
-      carmodel: '',
-      carcolor: '',
+      // carmodel: '',
+      // carcolor: '',
       oldPassword: '',
       newPassword: '',
       firstnameRules: [
@@ -157,12 +159,12 @@ export default {
       birthdateRules: [
           v => !!v || "Ce champs est requis"
       ],
-      carModelRules: [
-        v => !!v || 'Ce champ est requis'
-      ],
-      carColorRules: [
-        v => !!v || 'Ce champ est requis'
-      ],
+      // carModelRules: [
+      //   v => !!v || 'Ce champ est requis'
+      // ],
+      // carColorRules: [
+      //   v => !!v || 'Ce champ est requis'
+      // ],
       passwordRules: [
         v => v.length >= 8 || 'Le mot de passe doit faire au moins 8 charactères',
       ],
@@ -185,8 +187,8 @@ export default {
         email: this.mail,
         phone: this.mockUser.phone,
         birthDate: this.birthdate,
-        carmodel: this.carmodel,
-        carcolor: this.carcolor,
+        // carmodel: this.carmodel,
+        // carcolor: this.carcolor,
       })
     },
     
