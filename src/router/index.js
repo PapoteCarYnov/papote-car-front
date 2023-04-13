@@ -27,7 +27,8 @@ const routes = [
   {
     path: '/booking/:id',
     name: 'booking',
-    component: BookingView
+    component: BookingView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   }, 
   {
     path: '/search',
@@ -37,7 +38,8 @@ const routes = [
   {
     path: '/roadmap',
     name: 'roadmap',
-    component: RoadmapView
+    component: RoadmapView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/ride-detail/:id',
@@ -47,27 +49,32 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: ProfileView
+    component: ProfileView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/create-ride',
     name: 'create-ride',
-    component: CreateRideView
+    component: CreateRideView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/price/:id',
     name: 'price',
-    component: PriceView
+    component: PriceView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/summary/:id',
     name: 'summary',
-    component: SummaryView
+    component: SummaryView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/chat',
     name: 'chat',
-    component: ChatView
+    component: ChatView,
+    beforeEnter: (to, from, next) => beforeEnter(to, from, next)
   },
   {
     path: '/cgu',
@@ -77,6 +84,11 @@ const routes = [
   { path: '/404', component: NotFound },
   { path: '/:catchAll(.*)', redirect: '/404' }
 ];
+
+function beforeEnter(to, from, next) {
+  if (localStorage.getItem('isLoggedIn')) next();
+  else next({ name: 'login', force: true, state: { login: true } })
+}
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
