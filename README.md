@@ -1,29 +1,97 @@
-# papote-car-front
+# PapoteCar Front
 
-## Project setup
+## Introduction
+
+Ce projet a été réalisé dans le cadre de notre Master sur le cours : Séparation Backend / Front-End.
+
+PapoteCar est une nouvelle entreprise de covoiturage engagée dans la sauvegarde l’environnementet dans le Green-It. Elle permet à des particuliers de proposer des places dans leur voiture lors deleurs trajets. Vous devez développer le portail Web qui permettra aux usagers d’utiliser les servicesde cette entreprise.
+
+### Les objectifs à remplir :
+
+Les fonctionalités :
+
+- [x] Ajouter un trajet
+- [ ] Modifier un trajet
+- [ ] Supprimer un trajet
+- [x] S’inscrire sur un trajet
+- [ ] Se désinscrire sur un trajet
+- [x] Proposer un tableau de bord permettant de voir l’état des trajets en cours
+- [x] Proposer un tableau de bord permettant de voir les trajets réservés par un passager
+- [x] Authentification
+- [x] se renseigner sur les nouvelles réglementations RGPD en vigueur pour que vous et votre client soient enrègle vis-à-vis des dispositifs légaux
+- [~] Système de messagerie permettra à l’ensemble des personnes d’une voiture de discuter avant et après le trajet.
+- [ ] Un trajet peut avoir plusieurs étapes sur lesquelles un nouveau passager peut descendre o umonte
+- [~] Les passagers doivent être validés par le conducteur
+
+Fonctionalités supplémentaires :
+
+- [x] Modifier son profil
+- [x] Supprimer son profil
+- [x] Rechercher un trajet
+
+Attendu Minimum
+
+- [x] Maquetter une application responsive : [lien de la maquette](https://www.figma.com/proto/MMXLA9iA32F5cpWPNzyStq/PapoteCar?node-id=76%3A1300&scaling=scale-down&starting-point-node-id=76%3A1301)
+- [x] Concevoir une charte graphique cohérente
+- [x] Analyser et concevoir une application selon un cahier des charges
+- [x] Développer des composants d’accès aux données
+- [x] Développer la partie Front-End d’une interface utilisateur
+- [x] Développer la partie Back-End d’une interface utilisateur
+- [x] Communication front / back effective
+
+Attendu front :
+
+- [x] qualité de l'expérience utilisateur (y compris mobile)
+
+Bonus :
+
+- [x] Déploiement de l'application
+
+### Contributeurs:
+
+Les membres constituant le groupe sont les suivants :
+
+- Axelle Guinaudeau ([Theia01](https://github.com/Theia01))
+- Medi DEMIRDELEN ([medi-demirdelen](https://github.com/medi-demirdelen))
+- Camille NAULET ([camillenaulet03](https://github.com/camillenaulet03))
+- Lily MAJANI ([lilymajani](https://github.com/lilymajani))
+
+## Getting started
+
+### Mettre en place le projet
+
+Il vous faut ensuite **cloner le projet :**
+
+```sh
+git clone https://github.com/PapoteCarYnov/papote-car-front.git
 ```
+
+Par la suite, déplacez-vous à l'intérieur du dossier :
+
+```sh
+cd papote-car-front
+```
+
+Puis installez les dépendances requises au projet:
+
+```sh
 npm install
 ```
 
-## Compiles and hot-reloads for development
-```
-npm run serve
+Il sera également nécessaire de récupérer `.env` :
+
+```sh
+cp .env.dev .env
 ```
 
-### Start the server on another port (when launching the back locally)
-```
+Pour utiliser toutes les fonctionnalités de l'application en local, il vous faudra également cloner et lancer le Back : [PapoteCar Back](https://github.com/PapoteCarYnov/papote-car-back)
+
+Pour terminer, afin de lancer l'application, lancez la commande :
+
+```sh
 npm run serve -- --port 8081
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## Déploiement
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Le site est actuellement en ligne : [https://renard-temporaire.netlify.app/](https://renard-temporaire.netlify.app/)
