@@ -49,14 +49,14 @@
     <div v-if="empty" class="empty">
       <v-img style="margin: auto; display: block;" :src="require('../assets/first_car.svg')" width="500px" id="car"></v-img>
       <h2>Aucun voyage prévu !</h2><br />
-      <v-btn id="button">TROUVER UN TRAJET</v-btn>
+      <v-btn id="button" @click="router.push({ path: 'search' });">TROUVER UN TRAJET</v-btn>
     </div>
     <v-card id="driver">
       <v-img :src="require('../assets/car.svg')" width="200px" id="car"></v-img>
       <div class="create">
         <h2>Vous êtes conducteur ?</h2>
         <p>Trouvez votre compagnon de route pour papoter avec vous sur le trajet. Déposez votre annonce et vous n’aurez plus qu’à choisir votre covoitureur !</p><br />
-        <v-btn id="button">CRÉER VOTRE ANNONCE</v-btn>
+        <v-btn id="button" @click="router.push({ path: 'create-ride' });">CRÉER VOTRE ANNONCE</v-btn>
       </div>
     </v-card>
     <div v-if="!empty" class="results">
@@ -82,23 +82,26 @@
         </div>
       </v-card>
     </div>
-    <AppFooter />
   </div>
 </template>
 
 <script>
 
-import AppFooter from "@/components/AppFooter.vue";
+import router from "@/router";
 
 export default {
   name: 'RoadmapView',
-  components: {AppFooter},
   data() {
     return {
       driver: false,
       empty: true
     }
-  }
+  },
+  computed: {
+    router() {
+      return router
+    }
+  },
 }
 </script>
 <style scoped>

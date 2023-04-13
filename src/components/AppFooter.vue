@@ -1,5 +1,5 @@
 <template>
-  <section style="background-color: #361E09; margin-top: 2em;">
+  <section style="background-color: #361E09; z-index: 1;">
     <p style="color: #FFFBF7; font-size: 14px; padding: 2em 8em;">Conditions générales d'utilisation</p>
   </section>
 </template>

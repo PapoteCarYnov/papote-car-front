@@ -113,8 +113,12 @@ export default {
   inject: ["mq"],
 
   mounted() {
-    this.isLoggedIn = localStorage.getItem('user-token') != null;
-  }
+    //this.isLoggedIn = localStorage.getItem('user-token') != null;
+    this.emitter.on("isLoggedIn", r => {
+      this.isLoggedIn = r;
+    });
+  },
+
 };
 </script>
 

@@ -4,8 +4,12 @@ import LoginView from "@/views/LoginView.vue";
 import BookingView from "@/views/BookingView.vue";
 import SearchView from "@/views/SearchView.vue";
 import RoadmapView from "@/views/RoadmapView.vue";
+import RideDetailView from "@/views/RideDetailView.vue";
 import ProfileView from "@/views/ProfileView.vue";
-import CreateRouteView from "@/views/create/CreateRouteView.vue";
+import CreateRideView from "@/views/create/CreateRideView.vue";
+import PriceView from "@/views/create/PriceView.vue";
+import SummaryView from "@/views/create/SummaryView.vue";
+import ChatView from "@/views/ChatView.vue";
 import NotFound from "@/views/NotFoundView.vue";
 
 const routes = [
@@ -35,14 +39,34 @@ const routes = [
     component: RoadmapView
   },
   {
+    path: '/ride-detail',
+    name: 'ride-detail',
+    component: RideDetailView
+  },
+  {
     path: '/profile',
     name: 'profile',
     component: ProfileView
   },
   {
-    path: '/create-route',
-    name: 'creete-route',
-    component: CreateRouteView
+    path: '/create-ride',
+    name: 'create-ride',
+    component: CreateRideView
+  },
+  {
+    path: '/price/:id',
+    name: 'price',
+    component: PriceView
+  },
+  {
+    path: '/summary/:id',
+    name: 'summary',
+    component: SummaryView
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: ChatView
   },
   { path: '/404', component: NotFound },
   { path: '/:catchAll(.*)', redirect: '/404' }
