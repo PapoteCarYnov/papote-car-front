@@ -119,11 +119,11 @@
       </div>
       <v-divider :thickness="5" class="divider"></v-divider>
       <div id="lastpart">
-        <v-row>
-          <v-col>Votre véhicule</v-col>
-          <v-spacer/>
-          <v-col>Nom du véhicule</v-col>
-        </v-row>
+<!--        <v-row>-->
+<!--          <v-col>Votre véhicule</v-col>-->
+<!--          <v-spacer/>-->
+<!--          <v-col>Nom du véhicule</v-col>-->
+<!--        </v-row>-->
         <v-row>
           <v-col>Prix total pour 1 passager</v-col>
           <v-spacer/>

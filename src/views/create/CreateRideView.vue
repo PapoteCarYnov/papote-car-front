@@ -132,18 +132,18 @@
                 required
             ></v-select>
           </div>
-          <p>Ajoutez des précisions sur votre véhicule afin de vous retrouver plus facilement.</p>
-          <div class="car">
-            <div class="car left">
-              <v-icon icon="mdi-car" />
-              <div class="model">
-                <v-text-field v-model="model" label="Modèle du véhicule" placeholder="Modèle du véhicule" variant="underlined" required></v-text-field>
-              </div>
-            </div>
-            <div class="right">
-              <v-text-field v-model="color" label="Couleur du véhicule" placeholder="Couleur du véhicule" variant="underlined" required></v-text-field>
-            </div>
-          </div>
+<!--          <p>Ajoutez des précisions sur votre véhicule afin de vous retrouver plus facilement.</p>-->
+<!--          <div class="car">-->
+<!--            <div class="car left">-->
+<!--              <v-icon icon="mdi-car" />-->
+<!--              <div class="model">-->
+<!--                <v-text-field v-model="model" label="Modèle du véhicule" placeholder="Modèle du véhicule" variant="underlined" required></v-text-field>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="right">-->
+<!--              <v-text-field v-model="color" label="Couleur du véhicule" placeholder="Couleur du véhicule" variant="underlined" required></v-text-field>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
       <div style="text-align: center;">
