@@ -107,8 +107,8 @@ export default {
           authService.login({
             email: this.mail,
             password: this.password
-          }).then((r) => {
-            this.registerToken(r.data);
+          }).then(async (r) => {
+            await this.registerToken(r.data);
             router.push("/roadmap");
             this.emitter.emit("isLoggedIn", true);
           }).catch((e) => {
@@ -131,8 +131,8 @@ export default {
         }
       }
     },
-    registerToken(data) {
-      localStorage.setItem("user-token", data.token, 1000 * 60 * 24);
+    async registerToken(data) {
+      await localStorage.setItem("user-token", data.token, 1000 * 60 * 24);
     }
   },
   updated() {
