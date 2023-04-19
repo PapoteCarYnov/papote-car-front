@@ -1,10 +1,16 @@
-import { shallowMount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import LoginView from '@/views/LoginView.vue'
 
 describe('LoginView.vue', () => {
-  it('renders props.msg when passed', () => {
+  it('find text Inscription', () => {
     const msg = "InscriptionS'inscrire"
-    const wrapper = shallowMount(LoginView)
+    const wrapper = mount(LoginView)
     expect(wrapper.text()).toMatch(msg)
   })
-})
+
+  it('should show the form element on the user output', async() => {
+    const wrapper = mount(LoginView)
+    expect(wrapper.find("v-form").exists()).toBe(true)
+  })
+
+});
