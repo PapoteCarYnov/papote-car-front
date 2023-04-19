@@ -277,7 +277,7 @@
           }).catch((e) => {
             console.log("Erreur :", e);
           });
-          router.push({name: 'price', params: {id: id}});
+          await router.push({name: 'price', params: {id: id}});
         }
       },
 

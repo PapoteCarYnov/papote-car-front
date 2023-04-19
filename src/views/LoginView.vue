@@ -108,7 +108,7 @@ export default {
             email: this.mail,
             password: this.password
           }).then(async (r) => {
-            await this.registerToken(r.data);
+            await this.registerToken(await r.data);
             router.push("/roadmap");
             this.emitter.emit("isLoggedIn", true);
           }).catch((e) => {
