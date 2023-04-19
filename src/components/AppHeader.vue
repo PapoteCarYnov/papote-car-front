@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <MqResponsive target="sm+">
+    <MqResponsive target="md+">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
           <HeaderLogo></HeaderLogo>
@@ -16,7 +16,7 @@
         <SigninButton v-if="!isLoggedIn"></SigninButton>
       </v-app-bar>
     </MqResponsive>
-    <MqResponsive target="xs">
+    <MqResponsive target="xs-sm">
       <v-app-bar color="#FFFBF7">
         <template #prepend>
           <HeaderLogo></HeaderLogo>
