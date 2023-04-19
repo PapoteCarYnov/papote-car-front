@@ -280,7 +280,7 @@ export default {
           startCityId: start,
           endCityId: end,
           date: date,
-          status: "BROUILLON",
+          status: "A_VENIR",
         }
       }).then((r) => {
         console.log(r)
