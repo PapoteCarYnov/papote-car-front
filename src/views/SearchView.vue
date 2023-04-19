@@ -167,27 +167,29 @@
             <p>Heure de départ</p>
             <p>Heure de départ</p>
           </div>
-          <div>
-            <v-card class="card" @click="router.push(`/booking/2`);">
-              <div style="display: flex; flex-direction: row; padding-left: 2%;">
-                <ul class="padding">
-                  <li>6h</li>
-                  <li>7h</li>
-                </ul>
-                <ul class="bar">
-                  <li>step 1</li>
-                  <li>step 2</li>
-                </ul>
-                <div class="lastItem">
-                  <p style="font-weight: bold;">7€10</p>
-                  <p>2 places restantes</p>
-                </div>
+          <ul>
+            <li v-for="ride in rides" :key="ride.id">
+              <div>
+                <v-card class="card" @click="router.push(`/booking/${ride.id}`);">
+                  <div style="display: flex; flex-direction: row; padding-left: 2%;">
+                    <ul class="padding">
+                      <li v-for="step in ride.steps" :key="step.id">{{step.time}}</li>
+                    </ul>
+                    <ul class="bar">
+                      <li v-for="step in ride.steps" :key="step.id">{{step.city.name}}</li>
+                    </ul>
+                    <div class="lastItem">
+                      <p style="font-weight: bold;">{{ride.steps[0].prices[0].price}}€</p>
+                      <p>3 places restantes</p>
+                    </div>
+                  </div>
+                  <div style="padding: 2% 0 0 2%;">
+                    <p>{{ride.driver.firstname}}</p>
+                  </div>
+                </v-card>
               </div>
-              <div style="padding: 2% 0 0 2%;">
-                <p>Paul</p>
-              </div>
-            </v-card>
-          </div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -247,7 +249,8 @@ export default {
       ],
       showResult: false,
       zone: null,
-      hour: null
+      hour: null,
+      rides: []
     }
   },
   computed: {
@@ -283,7 +286,20 @@ export default {
           status: "A_VENIR",
         }
       }).then((r) => {
-        console.log(r)
+        this["rides"] = r.data
+        this.rides.forEach(ride => {
+          ride.steps.forEach(step => {
+            const [hours, minutes] = step.time.split(':');
+            const date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+            step.time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            console.log('time : ', step.time)
+          })
+        })
+        console.log('r : ', r)
+        console.log('r.data : ', r.data)
+        console.log('rides : ', this.rides)
       }).catch((e) => {
         console.log("Erreur :", e);
       });
@@ -489,6 +505,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .time {
     width: 100%;
   }
+}
+
+li {
+  list-style: none;
 }
 
 </style>
