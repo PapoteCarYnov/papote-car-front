@@ -152,10 +152,10 @@ export default {
       ]
     }
   },
-  mounted() {
+  async mounted() {
     const route = useRoute();
     this.id = route.params.id;
-    rideService.getRide(this.id).then((r) => {
+    await rideService.getRide(this.id).then((r) => {
       console.log(r.data);
       this.startTime = r.data.steps[0].time;
       this.endTime = r.data.steps[1].time;

@@ -104,7 +104,7 @@ export default {
       this.$refs.form.validate();
       if (this.valid) {
         if (this.login) {
-          authService.login({
+          await authService.login({
             email: this.mail,
             password: this.password
           }).then(async (r) => {
@@ -123,7 +123,7 @@ export default {
             birthDate: this.birthdate,
             phone: this.phone,
           };
-          authService.register(userCreateDto).then(() => {
+          await authService.register(userCreateDto).then(() => {
             router.push({ name: 'login', force: true, state: { login: true } });
           }).catch((e) => {
             console.log("Erreur :",e);

@@ -199,7 +199,7 @@ export default {
 
   async mounted() {
     await localStorage.getItem('user-token')
-    userService.getCurrentUser().then((r) => {
+    await userService.getCurrentUser().then((r) => {
       this.firstname = r.data.firstname;
       this.lastname = r.data.name;
       this.mail = r.data.email;

@@ -173,11 +173,10 @@ export default {
       return router
     }
   },
-  mounted() {
+  async mounted() {
     const route = useRoute();
     this.id = route.params.id;
-    rideService.getRide(this.id).then((r) => {
-      console.log(r.data);
+    await rideService.getRide(this.id).then((r) => {
       this.startTime = r.data.steps[0].time;
       this.endTime = r.data.steps[1].time;
       this.startCity = r.data.steps[0].city.name;
