@@ -4,7 +4,7 @@
     <div v-if="!empty" class="results">
       <h2>A venir</h2><br />
       <p style="font-weight: bold;">Vendredi 10 mars</p>
-      <v-card :class="`${driver ? 'driver' : 'card'}`" @click="toRideDetail(2)">
+      <v-card :class="`${driver ? 'driver' : 'card'}`" @click="toRideDetail(52)">
         <div style="display: flex; flex-direction: row; padding-left: 2%;">
           <ul class="padding">
             <li>6h</li>
@@ -26,7 +26,7 @@
     </div>
     <div v-if="!empty" class="results">
       <h2>En cours</h2><br />
-      <v-card :class="`${driver ? 'driver' : 'card'}`" @click="toBooking(2)">
+      <v-card :class="`${driver ? 'driver' : 'card'}`" @click="toBooking(52)">
         <div style="display: flex; flex-direction: row; padding-left: 2%;">
           <ul class="padding">
             <li>6h</li>
