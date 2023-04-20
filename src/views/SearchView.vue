@@ -162,11 +162,6 @@
           </div>
         </div>
         <div class="results">
-          <div style="padding-bottom: 10%;">
-            <h3>Heure de départ</h3>
-            <p>Heure de départ</p>
-            <p>Heure de départ</p>
-          </div>
           <ul>
             <li v-for="ride in rides" :key="ride.id">
               <div>
@@ -294,12 +289,8 @@ export default {
             date.setHours(hours);
             date.setMinutes(minutes);
             step.time = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            console.log('time : ', step.time)
           })
         })
-        console.log('r : ', r)
-        console.log('r.data : ', r.data)
-        console.log('rides : ', this.rides)
       }).catch((e) => {
         console.log("Erreur :", e);
       });
