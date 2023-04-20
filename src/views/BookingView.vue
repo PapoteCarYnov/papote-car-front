@@ -114,7 +114,7 @@
     </div>
 
     <v-row class="center-row">
-      <v-btn class="continue-button"> CONTINUER </v-btn>
+      <v-btn class="continue-button" @click="router.push({ name: 'roadmap' });"> RESERVER </v-btn>
     </v-row>
 
   </div>
